@@ -1,0 +1,618 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hahmlet&family=Sunflower:wght@300&family=Yeon+Sung&display=swap"
+    rel="stylesheet">
+  <title>양민석 - My Favorite Dishes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    *::selection {
+      background-color: rgba(200, 200, 200, 0.4);
+      color: white;
+    }
+
+    html {
+      font-size: 15px;
+      background-image: url('https://images.unsplash.com/photo-1613216512260-494def845d68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1868&q=80');
+      /* background-size: 100px; */
+      /* width: 20%; */
+      background-size: 100%;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header>h1 {
+      font-family: 'Hahmlet';
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    .banner {
+      grid-area: banner;
+    }
+
+    nav {
+      grid-area: nav;
+    }
+
+    article {
+      grid-area: content;
+    }
+
+    aside {
+      grid-area: sidebar;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+
+
+    body {
+      background-color: #bf0c0c;
+      color: #ffc600;
+      /* width: 100%; */
+      /* width: 600px; */
+      padding: 10px;
+      margin: 0 auto;
+    }
+
+    nav {
+      /* display: flex; */
+      /* display: inline-block; */
+      width: 100%;
+      z-index: 10;
+      /* height: 30px; */
+      top: 0px;
+      padding: 0px;
+      background-color: #e76a05;
+      /* padding-left: 1.12rem; */
+      line-height: 100%;
+      /* padding-top: 0.5rem; */
+      border-bottom: 3px solid #ffc600;
+      font-family: 'Hahmlet';
+      position: sticky;
+      transition: transform .2s;
+      /* margin: 0 auto; */
+    }
+
+    /* nav li {
+      display: inline-block;
+      margin-left: 5rem;
+    } */
+
+    .menu-board {
+      /* display: inline-block; */
+      display: flex;
+      /* width: 100%; */
+      /* margin: 20px 0px; */
+      padding: 5px;
+      justify-content: space-evenly;
+    }
+
+    /* .menu-board.menu-button {
+      justify-content: space-around;
+    } */
+
+    nav:hover {
+      transform: scale(1.1);
+    }
+
+    /* .sidebar {
+      width: 140px;
+      height: 200px;
+      background-color: #e76a05;
+      position: sticky;
+      top: 0px;
+      z-index: 9999;
+      display: block;
+      font-family: 'Hahmlet';
+      padding: 0px;
+      transition: transform .2s;
+      margin: 0 auto;
+      border: 2px solid #ffc600;
+      width: auto;
+      float: left;
+      top: 3rem;
+      margin-top: 3px;
+      margin-left: -150px;
+    } */
+
+    /* .side-button {
+      flex-direction: column;
+      display: flex;
+      height: 70px;
+      justify-content: space-between;
+    } */
+
+    a {
+      text-decoration: none;
+    }
+
+    .page-top {
+      scroll-margin-top: 5rem;
+    }
+
+    .banner {
+      display: flex;
+      justify-content: space-between;
+      margin: auto;
+      padding-top: 2px;
+      padding-bottom: 0;
+    }
+
+    .subheader {
+      scroll-margin-top: 2rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      /* text-decoration: transparent; */
+    }
+
+    /* a:visited {
+      color: rgb(146, 146, 146);
+    } */
+
+    ol {
+      margin: 0;
+      color: white;
+      /* background-color: ; */
+    }
+
+    /* nav,
+    section,
+    aside {
+      height: fit-content;
+    } */
+
+    footer {
+      display: grid;
+      border-top: 3px solid #ffc600;
+      color: rgb(211, 211, 211);
+      width: 100%;
+      /* height: 1rem; */
+      /* float: bottom; */
+      /* position: sticky; */
+      /* top: 3rem; */
+      /* padding-bottom: 1px; */
+      justify-content: space-evenly;
+      grid-template-columns: 2fr 5fr 2fr;
+      padding-top: 3rem;
+      /* background-color: #ffc600; */
+      ;
+    }
+
+    /* .footer-box {
+      background-color: #e76a05;
+      ;
+    } */
+
+    .footer-box p {
+      /* width: 100%; */
+      margin: 0.5rem;
+      font-size: 0.8rem;
+      text-align: right;
+      /* padding: 1rem auto; */
+    }
+
+    h5>a {
+      color: #ACEA85;
+    }
+
+
+    h5 {
+      text-align: right;
+    }
+
+    h3 {
+      padding: 1rem auto;
+      color: #fff;
+      border-bottom: 3px solid white;
+    }
+
+    h2>a {
+      color: #535353;
+      padding: 1.12rem;
+      font-family: 'Yeon Sung';
+      font-size: 2rem;
+    }
+
+    /* ul>li {
+      color: #ffffff;
+    } */
+
+    .subheader {
+      background-color: #ffc600;
+      color: #ffc600;
+      box-shadow: 5px 10px 40px rgb(66, 0, 0);
+    }
+
+    thead {
+      background-color: #fff;
+      color: #000;
+    }
+
+    table {
+      border: 3 solid white;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    tbody>tr:nth-child(2n-1) {
+      background-color: #744d4d;
+    }
+
+    tbody>tr:nth-child(2n) {
+      background-color: #7D0C0C;
+    }
+
+    td:nth-child(2n-1) {
+      /* opacity: 0.7; */
+      /* background-color: #744d4d; */
+      background-color: rgba(116, 77, 77, 0.5);
+      /* background-color: rgba(125, 12, 12, 0.5); */
+      text-align: center;
+    }
+
+    td:nth-child(2n) {
+      padding-left: 1rem;
+      font-family: 'Sunflower';
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: bolder;
+    }
+
+    .food-pic {
+      border: 3px solid #ffc600;
+      padding: 2px;
+      border-radius: 0 0px 20px 0;
+    }
+
+    td {
+      padding: 5px;
+      /* text-align: center; */
+    }
+
+
+    .link-rcp::before {
+      content: "🍴";
+      font-size: 1rem;
+    }
+
+    body {
+      display: grid;
+      gap: 10px;
+      grid-template-areas:
+        "header"
+        "banner"
+        "nav"
+        "content"
+        "sidebar"
+        "footer";
+    }
+
+    @media(min-width: 576px) {
+      nav ul {
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      body {
+        width: 95%;
+      }
+    }
+
+    @media(min-width: 768px) {
+      body {
+        width: 90%;
+        margin: 0 auto;
+        grid-template-columns: 5fr 2fr;
+        grid-template-areas:
+          "header header"
+          "banner banner"
+          "nav nav"
+          "content sidebar"
+          "footer footer";
+      }
+
+      nav div {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      nav div.menu-button {
+        padding-left: 0;
+      }
+
+      /* .banner {
+        height: 12rem;
+      } */
+
+      aside {
+        position: sticky;
+        top: 4.5rem
+      }
+    }
+
+    @media(min-width:1280px) {
+      body {
+        width: 80%;
+        margin: 0 auto;
+        grid-template-columns: 3fr 7fr 2fr;
+        grid-template-areas:
+          "header header  header"
+          "banner banner  banner"
+          "nav    content sidebar"
+          "footer footer  footer"
+      }
+
+      nav div {
+        flex-direction: column;
+        text-align: center;
+        justify-content: space-evenly;
+      }
+
+      nav {
+        scroll-margin-top: 5rem;
+        height: 5rem;
+      }
+
+      footer {
+        width: 100%;
+        height: 10rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="page-top">
+    <h1>내가 좋아하는 요리</h1>
+  </header>
+  <!-- <div class="menubar">
+    <nav>
+      <ul>
+        <li><a href="#menu01" style=color:#ffffff>떡볶이</a></li>
+        <li><a href="#menu02" style=color:#ffffff>두부김치</a></li>
+        <li><a href="#menu03" style=color:#ffffff>비빔국수</a></li>
+      </ul>
+    </nav>
+  </div> -->
+
+  <nav>
+    <div class="menu-board" style="width: 100%;">
+      <div class="menu-button"><a href="#menu01" style=color:#ffffff>떡볶이</a></div>
+      <div class="menu-button"><a href="#menu02" style=color:#ffffff>두부김치</a></div>
+      <div class="menu-button"><a href="#menu03" style=color:#ffffff>비빔국수</a></div>
+
+      <!-- <div><a href="#menu01" style=color:#ffffff class="menu-button">떡볶이</a></div>
+      <div><a href="#menu02" style=color:#ffffff class="menu-button">두부김치</a></div>
+      <div><a href="#menu03" style=color:#ffffff class="menu-button">비빔국수</a></div> -->
+
+    </div>
+  </nav>
+  <div class=banner>
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/19/428d563b3b0da9eddcc13af28205e4b7.jpg"
+      style="width:50%">
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/09/e37fdde9e8b1ffae5eb5ce50da1dd720.jpg"
+      style="width:50%">
+  </div>
+  <article>
+    <section id="menu01">
+      <h2 class="subheader"><a href="#page-top">떡볶이</a>
+      </h2>
+      <img class=food-pic width=100%
+        src="https://recipe1.ezmember.co.kr/cache/recipe/2021/04/20/2cedc46d1895d7fb95fa88078d5081c31.jpg">
+      <p>배달떡볶이 퀄리티 그대로, 직접 만들어봅시다.<br>
+        죠스와 엽떡의 레시피를 혼합한 버전입니다.</p>
+      <h3>재료</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>재료</th>
+            <th>용량</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>양념</strong></td>
+            <td><em>다진마늘1T, 고추가루2T, 설탕1T, 쇠고기다시다1t, 라면스프1t,
+                <br>
+                카레가루1t, 고추장1t, 물엿2T, 후추가루 적당량, 물 350ml</em>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>떡</strong></td>
+            <td><em>10개</em></td>
+          </tr>
+          <tr>
+            <td><strong>어묵</strong></td>
+            <td><em>2장</em></td>
+          </tr>
+          <tr>
+            <td><strong>양배추</strong></td>
+            <td><em>적당량</em></td>
+          </tr>
+          <tr>
+            <td><strong>비엔나소세지</strong></td>
+            <td><em>5개</em></td>
+          </tr>
+          <tr>
+            <td><strong>청양고추</strong></td>
+            <td><em>2개</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>조리방법</h3>
+      <ol>
+        <li>넉넉한 크기의 냄비를 준비하고, 분량의 양념을 잘 저어가며 4분간 끓입니다.</li>
+        <li>양념이 고루 섞여 잘 끓는지 확인 후 떡, 어묵, 소세지를 넣습니다.</li>
+        <li>숟가락이나 주걱 등으로 잘 저어가며 익힙니다.</li>
+        <li>국물이 졸아들어, 바닥을 긁었을 때 냄비 바닥이 살짝 보일 정도가 되면<br>
+          양배추와 청양고추를 넣습니다.</li>
+        <li>만약 치즈를 추가 하려면, 해동된 상태의 치즈를 위에 얹고 뚜껑을 덮습니다.<br>
+          약불로 1분 익힌 뒤 뚜껑을 덮은 채 조금 더 녹여줍니다.</li>
+      </ol>
+      <h5><a href="https://www.10000recipe.com/recipe/6957117" class="link-rcp"> '만개의 레시피' 떡볶이 보기</a></h5>
+    </section>
+    <section id="menu02">
+      <h2 class="subheader"><a href="#page-top">두부김치</a></h2>
+      <p>막걸리나 청주와 잘 어울리는 안주입니다.<br>
+        백종원 레시피를 참고했습니다.</p>
+      <img class=food-pic width=100%
+        src="https://recipe1.ezmember.co.kr/cache/recipe/2016/02/22/002db8930e7a12052bf0b91db9a1c7591.jpg">
+      <h3>재료</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>재료</th>
+            <th>용량</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>양념</strong></td>
+            <td><em>설탕1t, 고추가루1t, 후추 적당량, 맛술1t, 간장1T, <br>
+                굴소스1t, 고추장1t,다진마늘1t</em>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>돼지 목심</strong></td>
+            <td><em>100g</em></td>
+          </tr>
+          <tr>
+            <td><strong>김치</strong></td>
+            <td><em>200g</em></td>
+          </tr>
+          <tr>
+            <td><strong>두부</strong></td>
+            <td><em>반모</em></td>
+          </tr>
+          <tr>
+            <td><strong>청양고추</strong></td>
+            <td><em>2개</em></td>
+          </tr>
+          <tr>
+            <td><strong>양파</strong></td>
+            <td><em>50g</em></td>
+          </tr>
+          <tr>
+            <td><strong>파</strong></td>
+            <td><em>적당량</em></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>조리방법</h3>
+      <ol>
+        <li>두부 삶을 물을 끓입니다.</li>
+        <li>끓는 물에 두부를 넣고 7분 가량 익힙니다. <br>
+          꺼내기 전 참기름을 살짝 두르면 풍미가 좋습니다.</li>
+        <li>팬에 고기를 볶습니다.</li>
+        <li>기름이 필요하면 조금 둘러도 좋습니다. 파와 마늘을 함께 볶습니다.</li>
+        <li>설탕을 먼저 넣고 같이 볶습니다.</li>
+        <li>나머지 양념을 넣습니다.<br>
+          재료가 타지 않도록 물을 숟가락으로 조금씩 넣어주며 볶습니다.</li>
+        <li>두부와 속을 그릇에 담아냅니다.</li>
+      </ol>
+      <h5><a href="https://www.10000recipe.com/recipe/6843483" class="link-rcp"> '만개의 레시피' 두부김치 보기</a></h5>
+    </section>
+    <section id="menu03">
+      <h2 class="subheader"><a href="#page-top">비빔국수</a>
+      </h2>
+      <img class=food-pic
+        src="https://recipe1.ezmember.co.kr/cache/recipe/2018/03/22/599723cfecc8d9dd610aabadcbf6f3a71.jpg" width=100%>
+      <p>여름에 후다닥 해먹기 좋습니다.<br>
+        아하부장 레시피를 참고했습니다.</p>
+      <h3>재료</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>재료</th>
+            <th>용량</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>양념</strong></td>
+            <td><em>양파가루2t, 마늘가루2t, 고추가루1T, 설탕3T, 굴소스2t,<br> 진간장1T, 식초4T, 고추장3T</em>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><em>필요한 양만큼 비율을 맞춰 배수로 준비하는 것이 좋습니다.<br>
+                국수의 양에 맞춰서 양념장을 첨가해야하기 때문입니다. 냉장보관 합니다.</em>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>소면</strong></td>
+            <td><em>적당량</em></td>
+          </tr>
+          <tr>
+            <td><strong>소금</strong></td>
+            <td><em>1T</em></td>
+          </tr>
+          <tr>
+            <td><strong>김치</strong></td>
+            <td><em>50g</em></td>
+          </tr>
+          <tr>
+            <td><strong>참기름</strong></td>
+            <td><em>1t</em></td>
+          </tr>
+          <tr>
+            <td><strong>김가루</strong></td>
+            <td><em>적당량</em></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>조리방법</h3>
+      <ol>
+        <li>넉넉한 냄비에 소금1T와 물을 넣고 끓입니다.</li>
+        <li>끓는 물에 소면을 넣습니다.</li>
+        <li>거품이 일기 시작하면 넘치지 않도록 불을 조절합니다.<br>
+          약한 불로도 면은 충분히 익힐 수 있습니다.</li>
+        <li>면의 종류에 따라 익히는 시간은 모두 다르니 젓가락으로 조금씩 건져서<br>
+          물에 헹궈 직접 먹어봅니다.<br>
+          쫄깃한 느낌이 들면 덜익은 상태입니다. 잘 익혀야 찬물에 면을 식혀도 밀가루맛이 안납니다.</li>
+        <li>면을 채반에 받치고, 흐르는 물에 비벼서 씻고, 손바닥으로 잘 눌러서 물기를 짭니다.</li>
+        <li>비벼서 씻고 짜내는 과정을 3회 반복합니다.</li>
+        <li>그릇에 면을 담고, 참기름, 김치, 김가루를 얹습니다.</li>
+        <li>양념은 3T 정도만 넣은 후 색깔을 보며 더 넣어 조절합니다.</li>
+      </ol>
+      <h5><a href="https://www.10000recipe.com/recipe/6885928" class="link-rcp"> '만개의 레시피' 비빔국수 보기</a></h5>
+    </section>
+  </article>
+  <aside>
+    <img src="https://recipe1.ezmember.co.kr/cache/rpe/2021/07/23/6fa6b8f94b3b3813619f19ba07de17b01.jpg"
+      style="width:100%">
+    <img src="https://recipe1.ezmember.co.kr/cache/rpe/2021/07/01/5502a5db2f3e3fbc86d7e2d8ae61a4671.jpg"
+      style="width:100%">
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/26/d6ca0a9bf387ce696b3bda8da2153570.jpg"
+      style="width:100%">
+  </aside>
+  <footer>
+    <div></div>
+    <div class="footer-box">
+      <p>양민석</p>
+      <p>mssonjk@gmail.com</p>
+    </div>
+    <div></div>
+  </footer>
+</body>
+
+</html>
