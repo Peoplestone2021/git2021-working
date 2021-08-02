@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <script>
+    console.log("" + 1 + 0);                // 10   // "10"
+    console.log("" - 1 + 0);                // NaN  // -1
+    console.log(true + false);              // false  // 1: true=1, false=0
+    console.log(6 / "3");                   // NaN  // 2
+    console.log("2" * "3");                 // NaN  // 6
+    console.log(4 + 5 + "px");              // 45px  // "9px"
+    console.log("$" + 4 + 5);               // $45  // 
+    console.log("4" - 2);                   // NaN  // 2
+    console.log("4px" - 2);                 // NaN  //
+    console.log(7 / 0);                     // infinity  //
+    console.log("  -9  " + 5);              // -4  // " -9 5"
+    console.log("  -9  " - 5);              // -14  //
+    console.log(null + 1);                  // 1  // 1: null=0
+    console.log(undefined + 1);             // 1  // NaN
+    console.log(" \t \n" - 2);              // NaN  // -2: \t, \n = 공백문자이므로 \t \n = 0
+
+  </script>
+</body>
+
+</html>
