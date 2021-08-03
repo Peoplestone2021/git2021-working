@@ -42,8 +42,11 @@
     console.log(c || alert('c의 값은 할당되지 않았군요.'));
 
     if (typeof c == "undefined" || c === null || c === 0 || c === "") {
-      alert('c의 값은 할당되지 않았군요.');
+      alert('c의 값은 할당되지 않았거나 기본값이군요.');
     }
+    // short-circuit 응용
+    // 앞의 값이 false로 판별되면 뒤에 값을 실행
+    c || alert('c의 값은 할당되지 않았거나 기본값이군요.');
 
     // console.log();
   </script>

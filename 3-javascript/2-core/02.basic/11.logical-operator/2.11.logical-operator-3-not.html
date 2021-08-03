@@ -5,16 +5,19 @@
   <script>
     let a = true; // true
     let b = ""; // false로 판별
+    let d = (1 + 2 == 3);
 
-    // !(not) 논리값을 false로
-    console.log(!a); // 
-    console.log(!b); // 
+    // !(not) 논리값을 반대로
+    console.log(!a); // false
+    console.log(!b); // true
 
-    console.log(!!b); // 
+    console.log(!!b); // false
 
     // !!: not 연산을 두번 붙이면 변수의 논리값(boolean)을 추출할 수 있다
     let c = Boolean(b); // false, 원래 변수의 논리값(boolean)
-    let c = !!b; // 
+    // let c = !!b; // 
+    console.log(!!d);
+    console.log(d);
 
     // console.log();
   </script>

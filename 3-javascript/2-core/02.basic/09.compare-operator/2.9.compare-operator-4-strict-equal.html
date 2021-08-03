@@ -2,15 +2,19 @@
 
 <body>
   <script>
+    // ==, 자동으로 형변환 후 비교함
+    // 숫자가 우선순위에 있음
     console.log('1' == 1); // true
     console.log(true == '1'); // true
     console.log(true == '0'); // false
 
     console.log("-------------");
+
     // ===, strict(엄격한) equal
     // 자동 형변환을 하지 않고 비교함
     // 문자열 '1'과 숫자 1
     console.log('1' === 1); // false
+    console.log(1 === 1); //true
     console.log(true === '1'); // false
     console.log(true === '1'); // false
     console.log(true === '0'); // false
@@ -20,11 +24,14 @@
 
     console.log("-------------");
 
-    console.log("");
-    console.log(0);
-    console.log(undefined);
-    console.log(null);
-    console.log(NaN);
+    console.log(null == undefined); // true
+    console.log(null === undefined);  // false
+
+    /*     console.log("");
+        console.log(0);
+        console.log(undefined);
+        console.log(null);
+        console.log(NaN); */
 
   </script>
 </body>
