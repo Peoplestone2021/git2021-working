@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <script>
+    if (-1 || 0) alert('first');
+    if (-1 && 0) alert('second');
+    if (null || -1 && 1) alert('third');
+
+    // -1||0 = -1, truthy
+    // falsy && falsy, falsy
+    // null || -1 && 1 = null||1 = falsy||truthy, truthy
+    // 'first', 'third'
+
+
+    // console.log();
+  </script>
+</body>
+
+</html>

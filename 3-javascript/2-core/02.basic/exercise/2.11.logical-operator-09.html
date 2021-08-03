@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <script>
+    let login = prompt('관리자 아이디를 입력하세요.', 'Admin');
+
+    if (login == 'Admin') {
+      pass = prompt('비밀번호를 입력하세요.', '');
+      if (pass == 'TheMaster') {
+        alert('환영합니다!');
+      } else if (pass == ('' || null)) {
+        alert('취소되었습니다.');
+      } else if (!(pass == 'TheMaster')) {
+        alert('인증에 실패하였습니다.');
+      }
+    } else if (login == ('' || null)) {
+      alert('취소되었습니다.');
+    } else if (!(login == 'Admin')) {
+      alert('확인되지 않은 아이디입니다.');
+    }
+    // console.log();
+  </script>
+</body>
+
+</html>
