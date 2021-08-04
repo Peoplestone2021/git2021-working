@@ -1,0 +1,23 @@
+<html>
+<title>소수 출력하기</title>
+
+<body>
+  <script>
+    let n = prompt('임의의 숫자를 입력하세요.', '10');
+    // let n = 10;
+
+    outer:
+    for (let i = 2; i < n; i++) {
+      for (let j = 2; j < i; j++) {
+        if (i % j == 0) {
+          continue outer;
+        }
+      }
+      console.log(i);
+    }
+
+    // console.log();
+  </script>
+</body>
+
+</html>
