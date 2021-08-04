@@ -1,0 +1,24 @@
+<html>
+<title>2.13.while-for-3-break</title>
+
+<body>
+  <script>
+    let sum = 0;
+
+    while (true) {
+
+      let value = +prompt("숫자를 입력하세요.", '');
+
+      // !value -> value 가 false이면(NaN, null, 0)
+      // break 구문이 실행되면 밑의 구문은 실행x 탈출
+      if (!value) break; // (*)
+
+      sum += value;
+      // 합산 대입: 복합대입문
+    }
+    alert('합계: ' + sum);
+    // console.log();
+  </script>
+</body>
+
+</html>
