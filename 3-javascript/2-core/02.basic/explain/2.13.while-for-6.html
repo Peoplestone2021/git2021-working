@@ -1,0 +1,30 @@
+<html>
+<title>사용자가 유효한 값을 입력할 때까지 프롬프트 창 띄우기</title>
+
+<body>
+  <script>
+    /* let input = prompt('100보다 큰 숫자를 입력하세요.', '100');
+
+    while (input <= 100) {
+      prompt('100보다 큰 숫자를 입력하세요.', '100');
+    } if ((input > 100) || (input = '') || (input = null)) break; */
+
+    // let input = prompt('100보다 큰 숫자를 입력하세요.', '100');
+
+    /* let input;
+    do {
+      prompt('100보다 큰 숫자를 입력하세요.', '100');
+    } while (input <= 100 && input); */
+    // 일반적으로 반복문 조건이 falsy가 되면 break
+
+
+
+    let input;
+    do {
+      input = prompt('100보다 큰 숫자를 입력하세요.', '100');
+    } while (input <= 100 && input);
+    // console.log();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<html>
+<title>while 반복문의 출력값 예상하기</title>
+
+<body>
+  <script>
+    let i = 0;
+    while (++i < 5) alert(i);
+
+    let i = 0;
+    while (i++ < 5) alert(i);
+    // let 0 -> alert(1);
+    // let 1 -> alert(2);
+    // let 2 -> alert(3);
+    // let 3 -> alert(4);
+    // let 4 -> alert(5);
+
+    // 후위 연산자가 뒤 i를 정의하기 때문에 마지막 출력값은 5이다
+    // console.log();
+  </script>
+</body>
+
+</html>

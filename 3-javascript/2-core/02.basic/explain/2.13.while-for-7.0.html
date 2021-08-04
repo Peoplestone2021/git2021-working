@@ -1,0 +1,27 @@
+<html>
+<title>소수 출력하기</title>
+
+<body>
+  <script>
+    /* let n = (1:10);
+
+    for (let i = 0; i <= 10; i++) {
+      if (i % n ==
+        alert(i);
+    } */
+    let n = +prompt('숫자를 입력하세요.', '10');
+
+    nextPrime:
+    for (let i = 2; i <= n; i++) {
+      for (let j = 2; j < i; j++) {
+        if (i % j == 0) continue nextPrime;
+      }
+      alert(i);
+    }
+
+
+    // console.log();
+  </script>
+</body>
+
+</html>
