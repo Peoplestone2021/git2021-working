@@ -1,0 +1,55 @@
+<html>
+<title>2.15.function-9-arrow-function</title>
+
+<body>
+  <script>
+    // 함수선언
+    function sum(a, b) {
+      return a + b;
+    }
+
+    sum(1, 2);
+    // console.log();
+  </script>
+
+  <script>
+    // 함수표현식
+    let sum = function (a, b) {
+      return a + b;
+    }
+
+    sum(1, 2);
+  </script>
+
+  <script>
+    // 화살표함수(arrow function)
+    // 현재는 아주 많이 쓰이는 함수 선언 표현식
+
+
+
+    // let 변수 = (매개변수) => {...구문}
+    // {중괄호 구문} 이 생략되면 해당구문의 값이 return이 됨
+    let sum = (a, b) => a || b;
+    // const sum = (a, b) => a + b;
+
+    let sum2 = (a, b) => {
+      // ...
+      // ...
+      return a + b;
+    }
+
+
+    function logic(a, b) {
+      if (typeof a == "undefined" || a == null || a == "") {
+        return b;
+      } else {
+        return a
+      }
+    }
+
+    let logic1 = (a, b) => a || b
+
+  </script>
+</body>
+
+</html>

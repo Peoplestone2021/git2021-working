@@ -1,0 +1,31 @@
+<html>
+<title></title>
+
+<body>
+  <script>
+    /* function sayHi(name) {
+      alert(`Hello, ${name}`);
+    } */
+    // hoisting(끌어올리다)
+    // 뒤에 선언이 있고, 앞에서 사용을 하면 선언을 내부적으로
+    // 허용범위 최상단으로 끌어올려줌
+    // 함수선언이 우선순위 실행
+    sayHi("John"); // Hello, John
+
+    function sayHi(name) {
+      alert(`Hello, ${name}`);
+    }
+    // console.log();
+  </script>
+
+  <script>
+    // 함수 표현식은 우선순위 없음
+    sayHi("John"); // error!
+
+    let sayHi = function (name) {  // (*) 마술은 일어나지 않습니다.
+      alert(`Hello, ${name}`);
+    };
+  </script>
+</body>
+
+</html>
