@@ -1,0 +1,33 @@
+<html>
+<title>15.triangle</title>
+
+<body>
+  <script>
+    // 1     * (4) 1
+    // 2    *** (3) 3
+    // 3   ***** (2) 5
+    // 4  ******* (1) 7
+    // 5 ********* (0) 9
+
+    let point = '*';
+    let space = ' ';
+
+    for (i = 1; i < 6; i++) {
+      let triangle = '';
+      for (j = 4; j > (5 - i); j--) {
+        triangle += space;
+      }
+      for (k = 0; k < i * 2 - 1; k++) {
+        if (k % 2 !== 0) {
+          triangle += point;
+        }
+      }
+      console.log(triangle);
+    }
+
+
+    // console.log();
+  </script>
+</body>
+
+</html>
