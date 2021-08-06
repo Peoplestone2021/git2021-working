@@ -4,8 +4,10 @@
 <body>
 
   <script>
+    // 객체에 프로퍼티가 하나도 없는 경우 true, 
+    // 그렇지 않은 경우 false를 반환해주는 
+    // 함수 isEmpty(obj)를 만들어 보세요.
 
-    // ...여기에 코드를 작성하세요...
     function isEmpty(obj) {
       for (let prop in obj) {
         return false;
@@ -13,13 +15,15 @@
       return true;
     }
 
+
+
     let schedule = {};
 
     console.log(isEmpty(schedule)); true
 
-    schedule["8:45"] = "get up";
+    schedule["8:45"] = "to heaven";
 
-    console.log(isEmpty(scedule)); // false
+    console.log(isEmpty(schedule)); // false
 
   </script>
 </body>

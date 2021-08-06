@@ -10,11 +10,12 @@
     };
 
     let sum = 0;
-    for (let key in salaries) {
-      sum += salaries[key];
+    for (let prop1 in salaries) {
+      console.log(prop1);
+      sum += salaries[prop1];
     }
 
-    alert(sum); // 390
+    console.log(sum); // 390
   </script>
 </body>
 

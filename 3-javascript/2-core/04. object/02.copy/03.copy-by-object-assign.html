@@ -1,0 +1,21 @@
+<html>
+<title>Object.assign</title>
+
+<body>
+  <script>
+    let user = {
+      name: "John",
+      age: 30
+    };
+
+    let admin = Object.assign({}, user);
+
+
+    // 이제 clone은 완전히 독립적인 복제본이 되었습니다.
+    admin.name = "Pete"; // clone의 데이터를 변경합니다.
+
+    console.log(user.name); // 기존 객체에는 여전히 John이 있습니다.
+  </script>
+</body>
+
+</html>

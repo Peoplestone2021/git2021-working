@@ -4,12 +4,23 @@
 <body>
   <script>
     function multiplyNumeric(obj) {
-      for (let key in obj) {
-        if (typeof obj[key] == 'number') {
-          obj[key] *= 2;
+      for (let prop1 in obj) {
+        if (typeof obj[prop1] == 'number') {
+          obj[prop1] *= 2;
         }
       }
     }
+
+    // 함수 호출 전
+    let menu = {
+      width: 200,
+      height: 300,
+      title: "My menu"
+    };
+
+    multiplyNumeric(menu);
+
+    console.log(menu);
   </script>
 </body>
 

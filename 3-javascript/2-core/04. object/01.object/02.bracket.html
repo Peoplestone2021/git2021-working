@@ -9,10 +9,56 @@
     user["likes birds"] = true;
 
     // get
-    alert(user["likes birds"]); // true
+    console.log(user["likes birds"]); // true
 
     // delete
     delete user["likes birds"];
+
+    console.log('---------------------------')
+    let prop = "likes birds";
+
+    // user["likes birds"] = true; 와 같습니다.
+    user[prop] = true;
+
+    let user1 = {
+      name: "John",
+      age: 30
+    };
+
+    let prop1 = prompt("사용자의 어떤 정보를 얻고 싶으신가요?", "name");
+
+    // 변수로 접근
+    console.log(user1[prop1]); // John (프롬프트 창에 "name"을 입력한 경우)
+
+    console.log('---------------------------')
+
+    let fruit = prompt("어떤 과일을 구매하시겠습니까?", "apple");
+
+    let bag = {
+      [fruit]: 5, // 변수 fruit에서 프로퍼티 이름을 동적으로 받아 옵니다.
+    };
+
+    console.log(bag.apple); // fruit에 "apple"이 할당되었다면, 5가 출력됩니다.
+    console.log(bag[fruit]); // fruit에 "apple"이 할당되었다면, 5가 출력됩니다.
+
+    console.log('---------------------------')
+
+    let fruit1 = prompt("어떤 과일을 구매하시겠습니까?", "apple");
+    let bag1 = {};
+
+    // 변수 fruit을 사용해 프로퍼티 이름을 만들었습니다.
+    bag1[fruit1] = 5;
+    console.log(bag1.apple); // fruit에 "apple"이 할당되었다면, 5가 출력됩니다.
+    console.log(bag1[fruit1]); // fruit에 "apple"이 할당되었다면, 5가 출력됩니다.
+
+    console.log('---------------------------')
+
+    let fruit2 = 'apple';
+    let bag2 = {
+      [fruit2 + 'Computers']: 5 // bag.appleComputers = 5
+    };
+
+    console.log(bag2);
   </script>
 </body>
 

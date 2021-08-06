@@ -12,18 +12,18 @@
 
     user = {
       name: "John",
-      surname: "Smith"
     }
 
-    console.log(user);
+    console.log(user["name"]);
 
+    user.surname = "Smith";
     user.name = "Pete";
 
-    console.log(user);
+    console.log(user['surname']);
 
-    delete user.name;
+    // delete user.name;
 
-    console.log(user);
+    console.log(user['name'] + ' ' + user['surname']);
 
   </script>
 </body>
