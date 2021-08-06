@@ -1,0 +1,26 @@
+<html>
+<title>01.object-2</title>
+
+<body>
+  <script>
+
+    // ...여기에 코드를 작성하세요...
+    function isEmpty(obj) {
+      for (let prop in obj) {
+        return false;
+      }
+      return true;
+    }
+
+    let schedule = {};
+
+    console.log(isEmpty(schedule)); // true
+
+    schedule["8:45"] = "get up";
+
+    console.log(isEmpty(schedule)); // false
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<html>
+<title>프로퍼티 값 두 배로 부풀리기</title>
+
+<body>
+  <script>
+
+    function multiplyNumeric(obj) {
+      for (let prop in obj) {
+        if (typeof obj[prop] == 'number') {
+          obj[prop] *= 2;
+        }
+      }
+    }
+    // 함수 호출 전
+    let menu = {
+      width: 200,
+      height: 300,
+      title: "My menu"
+    };
+
+    multiplyNumeric(menu);
+
+    // 함수 호출 후
+    // menu = {
+    //   width: 400,
+    //   height: 600,
+    //   title: "My menu"
+    // };
+
+    console.log(menu);
+  </script>
+
+  <sscript>
+
+  </sscript>
+</body>
+
+</html>

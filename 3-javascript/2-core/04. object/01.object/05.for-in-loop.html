@@ -1,0 +1,32 @@
+<html>
+<title></title>
+
+<body>
+  <script>
+
+    // for(prop in object){
+    // 
+    // }
+
+    let user = {
+      name: "John",
+      age: 30,
+      isAdmin: true
+    };
+
+    // for(속성명변수 in 객체)
+
+    // 반복횟수: 객체의 속성 개수만큼 반복
+    // let prop: 객체의 각 속성명이 대입되는 변수
+    for (let prop in user) {
+      // 키
+      console.log(`${prop}: ${user[prop]}`);  // name, age, isAdmin
+      // 키에 해당하는 값
+      // console.log(user[prop]); // John, 30, true
+    }
+
+
+  </script>
+</body>
+
+</html>
