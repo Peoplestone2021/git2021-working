@@ -1,0 +1,28 @@
+<html>
+<title></title>
+
+<body>
+  <script>
+    // 콜스택(call stack); 함수 호출 -> 실행 stack 자료구조에 넣어서 실행됨
+    // 함수 호출하면 가장 나중에 호출한 함수가 먼저 실행
+    function a() {
+      b();
+      alert("a");
+    }
+
+    function b() {
+      c();
+      alert("b");
+    }
+    function c() {
+      alert("c");
+    }
+
+    a();
+
+  </script>
+</body>
+
+</html>
+
+</html>

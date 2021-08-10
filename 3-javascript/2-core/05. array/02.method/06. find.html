@@ -1,0 +1,24 @@
+<html>
+  <title>find와 findIndex</title>
+
+  <body>
+    <script>
+      const array1 = [5, 12, 8, 130, 44];
+
+      const found = array1.find((element) => element > 10);
+      console.log(found); // expected output: 12
+
+      let users = [
+        { id: 1, name: "John" },
+        { id: 2, name: "Pete" },
+        { id: 3, name: "Mary" },
+      ];
+
+      // 배열.find(판별함수)
+      // 판별함수의 반환값이 true인 요소를 반환
+      let user = users.find((item) => item.id > 1);
+
+      console.log(user.name); // John
+    </script>
+  </body>
+</html>

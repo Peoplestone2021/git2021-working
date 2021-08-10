@@ -1,0 +1,26 @@
+<html>
+  <title>스팸 문자열 걸러내기</title>
+
+  <body>
+    <script>
+      function checkSpam(str) {
+        // str.toLowerCase();
+        let lowerStr = str.toLowerCase();
+
+        // if (str.indexOf("viagra") != -1) {
+        //   return true;
+        // }
+        // if (str.indexOf("xxx") != -1) {
+        //   return true;
+        // }
+
+        return lowerStr.includes("viagra") || lowerStr.includes("xxx");
+        // return false;
+      }
+
+      console.log(checkSpam("buy ViAgRA now")); // == true
+      console.log(checkSpam("free xxxxx")); // == true
+      console.log(checkSpam("innocent rabbit")); // == false
+    </script>
+  </body>
+</html>

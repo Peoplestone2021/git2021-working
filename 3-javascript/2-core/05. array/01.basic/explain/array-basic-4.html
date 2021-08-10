@@ -1,0 +1,31 @@
+<html>
+<title>입력한 숫자의 합 구하기</title>
+
+<body>
+  <script>
+    function sumInput() {
+      let arr = [];
+
+      while (true) {
+        let input = prompt("숫자를 입력해주세요.", "");
+        // NaN, "", null 나감
+        // 입력받은 문자를 숫자 변환 NaN 체크
+        if (isNan(+input) || input == "" || input == null)
+          break;
+
+        arr.push(+input);
+      }
+      let sum = 0;
+      for (let elm of arr) {
+        sum += elm;
+      }
+      return sum;
+    }
+
+    alert(sumInput());
+  </script>
+</body>
+
+</html>
+
+</html>

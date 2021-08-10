@@ -1,0 +1,25 @@
+<html>
+  <title>sort-string</title>
+
+  <body>
+    <script>
+      let arr = ["Nazgul", "Bilbo", "Gandalf"];
+
+      arr.sort((a, b) => {
+        // 0보다 큰 경우, b를 a보다 낮은 인덱스로 소트. 즉, a가 먼저 옴
+        // b, a
+        if (a > b) return 1;
+        // 0을 반환하면 a와 b를 서로에 대해 변경하지 않음
+        if (a == b) return 0;
+        // 0보다 작은 경우, a를 b보다 높은 인덱스로 정렬합니다. 즉, a가 뒤에 옵니다
+        // 작은 값을 앞쪽에 오게 함.
+        if (a < b) return -1;
+      });
+
+      // 원본문자열.localeCompare(비교문자열);
+      arr.sort((a, b) => a.localeCompare(b));
+
+      console.log(arr);
+    </script>
+  </body>
+</html>

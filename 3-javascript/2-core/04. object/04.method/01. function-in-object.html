@@ -1,0 +1,64 @@
+<html>
+<title>01. function-in-object</title>
+
+<body>
+  <!-- <script>
+    // 메서드(method): 객체 내부의 함수
+    let user = {
+      name: "John",
+      age: 30,
+      sayHi: function () {
+        alert("안녕하세요!");
+      }
+    };
+    user.sayHi(); // 안녕하세요!
+
+    // user.sayHi = function () {
+    //   alert("안녕하세요!");
+    // };
+
+  </script> -->
+  <!-- <script>
+    // 메서드(method): 객체 내부의 함수
+    let user = {
+      name: "John",
+      age: 30,
+      sayHi() {
+        alert("안녕하세요!");
+      }
+    };
+
+    user.sayHi(); // 안녕하세요!
+  </script> -->
+  <!-- <script>
+    // 메서드(method): 객체 내부의 함수
+    let user = {
+      name: "John",
+      age: 30,
+      phone: {
+        mobile: "010 - 1111 - 1111",
+        home: "02 - 123 - 1234",
+        company: "031 - 1234 - 1234",
+      }
+    };
+
+    console.log(user.phone.mobile);
+  </script> -->
+  <script>
+    let user = {
+      // ...
+    };
+
+    // 함수 선언
+    function sayHi() {
+      alert("안녕하세요!");
+    };
+
+    // 선언된 함수를 메서드로 등록
+    user.sayHi = sayHi;
+
+    user.sayHi(); // 안녕하세요!
+  </script>
+</body>
+
+</html>

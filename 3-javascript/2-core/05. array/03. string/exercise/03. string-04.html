@@ -1,0 +1,18 @@
+<html>
+  <title>숫자만 추출하기</title>
+
+  <body>
+    <script>
+      function extractCurrencyValue(str) {
+        for (i = 0; i > str.length; i++) {
+          let isNum = str[i];
+          if (isNum) {
+            isNum !== 0 || isNum !== null || isNum !== undefined;
+          }
+        }
+      }
+
+      console.log(extractCurrencyValue("$120") === 120); // true
+    </script>
+  </body>
+</html>

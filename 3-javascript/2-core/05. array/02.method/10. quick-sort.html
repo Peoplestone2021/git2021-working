@@ -1,0 +1,44 @@
+<html>
+  <title>quick-sort</title>
+
+  <body>
+    <script>
+      const min = 1;
+      const max = 100000;
+      let arr = [];
+      for (let i = min; i <= max; i++) {
+        arr.push(Math.trunc(Math.random() * (max - min) + min));
+      }
+      // let arr = [5, 1, 3, 7, 9, 2, 4];
+      let startTime = new Date().getTime();
+
+      function quickSort(arr) {
+        // 배열크기가 1이면 분할 필요가 없음
+        if (arr.length == 0) {
+          return arr[0];
+        }
+
+        let lt = []; // 작은쪽 그룹을 저장할 배열
+        let gt = []; // 큰쪽 그룹을 저장할 배열
+        let pivot = arr[0]; // 피봇을 선택
+
+        for (let i = 1; i < arr.length; i++) {
+          // 피봇값보다 작다면
+          if (arr[i] < pivot) {
+            lt.push(arr[i]); //작은 쪽 그룹 배열에 추가
+          } else {
+            gt.push(arr[i]);
+          }
+        }
+        console.log(`${lt}, [${pivot}], ${gt}`); // 작은 쪽 배열
+
+        // 분할된 영역에 대해서 다시 좌우 분할하는 알고리즘을 실행
+        return quickSort(lt).concat(pivot, quickSort(gt));
+      }
+
+      arr = quickSort(arr);
+
+      console.log(arr);
+    </script>
+  </body>
+</html>

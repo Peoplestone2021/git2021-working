@@ -1,0 +1,50 @@
+<html>
+<title>최대합 부분 배열</title>
+
+<body>
+  <script>
+    function getMaxSubSum(arr) {
+      let max = 0;
+      let temp = 0;
+
+      // 처음부터 끝까지 요소를 탐색
+      // length: 5, 0~4
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i; j < arr.length; j++) {
+          temp += arr[j];
+
+          // 연산횟수(=반복문 횟수)
+          // 1+~n(length)
+          // (n+1)*n/2
+          // n(n+1)/2
+          // 
+
+          if (temp > max) {
+            max = temp;
+          }
+        }
+        return max;
+
+      }
+
+      return max;
+    }
+
+    // let test = [
+    //   ([-1, 2, 3, -9]), // == 5,
+    //   ([2, -1, 2, 3, -9]), // == 6,
+    //   ([-1, 2, 3, -9, 11]), // == 11,
+    //   ([-2, -1, 1, 2]), // == 3,
+    //   ([100, -9, 2, -3, 5]), // == 100,
+    //   ([1, 2, 3]), // == 6,
+    // ]
+
+    // for (let elm of test) {
+    //   console.log(getMaxSub(elm));
+    // }
+  </script>
+</body>
+
+</html>
+
+</html>

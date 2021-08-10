@@ -1,0 +1,23 @@
+<html>
+  <title>map</title>
+
+  <body>
+    <script>
+      // let result = arr.map(function (item, index, array) {
+      //   // 요소 대신 새로운 값을 반환합니다.
+      // });
+      let arr = ["Bilbo", "Gandalf", "Nazgul"];
+
+      // 1. 동일한 크기의 새로운 배열을 반환
+      // let lengths = arr.map(item => item.length);
+      let lengths = arr.map((item, index) => ({ id: index + 1, name: item }));
+      console.log(lengths); // 5,7,6
+
+      // [
+      //   { id: 1, name: "Bilbo" },
+      //   { id: 2, name: "Gandalf" },
+      //   { id: 3, name: "Nazgul" },
+      // ]
+    </script>
+  </body>
+</html>

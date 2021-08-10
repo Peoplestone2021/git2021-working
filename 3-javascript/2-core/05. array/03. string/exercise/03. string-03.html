@@ -1,0 +1,19 @@
+<html>
+  <title>문자열 줄이기</title>
+
+  <body>
+    <script>
+      function truncate(str, a) {
+        if (str.length > 20) {
+          let maxlength = str.slice(0, +a);
+          return maxlength + "...";
+        }
+        return str;
+      }
+
+      console.log(truncate("What I'd like to tell on this topic is:", 20)); // = "What I'd like to te…"
+
+      console.log(truncate("Hi everyone!", 20)); // = "Hi everyone!"
+    </script>
+  </body>
+</html>

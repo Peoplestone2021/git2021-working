@@ -1,0 +1,19 @@
+<html>
+<title></title>
+
+<body>
+  <script>
+    function makeUser() {
+      return {
+        name: "John",
+        ref: this
+      };
+    };
+
+    let user = makeUser();
+
+    alert(user.ref.name); // 결과가 어떻게 될까요?
+  </script>
+</body>
+
+</html>

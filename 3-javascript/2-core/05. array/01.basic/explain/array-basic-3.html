@@ -1,0 +1,21 @@
+<html>
+<title>배열 컨텍스트에서 함수 호출하기</title>
+
+<body>
+  <script>
+    let arr = ["a", "b", { id: 1, name: "john" }, 1];
+
+    arr.push(function () {
+      console.log(this);
+    })
+    // arr.push(() => {
+    //   console.log(this);
+    // })
+
+    arr[4](); // ?
+  </script>
+</body>
+
+</html>
+
+</html>
