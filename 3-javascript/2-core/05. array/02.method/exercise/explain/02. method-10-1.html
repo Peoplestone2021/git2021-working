@@ -1,0 +1,37 @@
+<html>
+  <title>배열 요소 무작위로 섞기</title>
+
+  <body>
+    <script>
+      // 랜덤 정렬
+      function shuffle(array) {
+        array.sort((a, b) => Math.random() * 2 - 1);
+      }
+
+      // 음수, 0, 양수
+      // sort((a,b) => -1, 0, 1): 무작위로 나옴
+
+      // 0 ~ 1 사이 무작위 숫자, 1을 미포함
+      Math.random();
+
+      // 0 ~ 2 사이 무작위 숫자, 2는 미포함
+      Math.random() * 2;
+
+      // -1 ~ 1 사이의 무작위 숫자, 1은 미포함
+      // -1 ~ 0 음수
+      // 0
+      // 0 ~ 1 양수
+      console.log(Math.random() * 2 - 1);
+
+      let arr = [1, 2, 3];
+      shuffle(arr);
+      console.log(arr);
+
+      shuffle(arr);
+      console.log(arr);
+
+      shuffle(arr);
+      console.log(arr);
+    </script>
+  </body>
+</html>

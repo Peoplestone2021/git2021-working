@@ -1,0 +1,17 @@
+<html>
+  <title>특정 범위에 속하는 요소 찾기</title>
+
+  <body>
+    <script>
+      function filterRange(arr, a, b) {
+        arr.filter((item) => item >= a && item <= b);
+      }
+
+      let arr = [5, 3, 8, 1];
+      let filtered = filterRange(arr, 1, 4); // arr.filter((item) => item >= a && item <= max);
+
+      console.log(filtered);
+      console.log(arr);
+    </script>
+  </body>
+</html>

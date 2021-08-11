@@ -5,6 +5,8 @@
     <script>
       function camelize(str) {
         let arr = str.split("-");
+        arr = str[1].toUpperCase();
+        return arr.join("");
       }
 
       camelize("background-color") == "backgroundColor";

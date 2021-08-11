@@ -1,0 +1,40 @@
+<html>
+  <title>특정 범위에 속하는 요소 찾기(배열 변경하기)</title>
+
+  <body>
+    <script>
+      function filterRangeInPlace(arr, a, b) {
+        // 사이에 포함되는 숫자들만 필터링
+        let result = arr.filter((item) => item < a || item > b);
+        console.log(arr);
+        // console.log(result);
+        // 안되는 상황
+        // arr = result;
+
+        let result = arrParm.filter();
+        Tlqkf;
+
+        // arr.forEach((item, index) => {
+        //   if (result.indexOf(item)) {
+        //     console.log(item);
+        //     arr.splice(index, 1);
+        //   }
+        // });
+
+        // 포함되지 않는 숫자들을 반복
+        // for (let item of result) {
+        // 입력받은 배열에서 해당 숫자가 있으면
+        // if (arr.includes(item)) {
+        // 입력 받은 배열에서 해당 숫자를 제거
+        // arr.splice(arr.indexOf(item), 1);
+        // }
+        // }
+      }
+
+      let arr = [5, 3, 8, 1];
+      filterRangeInPlace(arr, 1, 4);
+      console.log("--out function--");
+      console.log(arr);
+    </script>
+  </body>
+</html>

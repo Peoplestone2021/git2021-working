@@ -1,0 +1,19 @@
+<html>
+  <title>배열 복사본을 정렬하기</title>
+
+  <body>
+    <script>
+      function copySorted(arr) {
+        let copy = [...arr];
+        // return copy.sort((a, b) => -a.localeCompare(b));
+        return copy.sort();
+      }
+
+      let arr = ["HTML", "JavaScript", "CSS"];
+      let sorted = copySorted(arr);
+
+      console.log(sorted);
+      console.log(arr);
+    </script>
+  </body>
+</html>

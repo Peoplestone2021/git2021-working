@@ -1,0 +1,21 @@
+<html>
+  <title>숫자만 추출하기</title>
+
+  <body>
+    <script>
+      function extractCurrencyValue(str) {
+        let result = "";
+
+        for (let chr of str) {
+          if (isNaN(+chr)) {
+            result += chr;
+          }
+        }
+
+        return +result;
+      }
+
+      console.log(extractCurrencyValue("$120") === 120); // true
+    </script>
+  </body>
+</html>
