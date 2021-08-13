@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <style>
+      .alert {
+        padding: 15px;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+    </style>
+    <div id="container"></div>
+    <script>
+      const container = document.querySelector("#container");
+
+      let div = document.createElement("div");
+      div.className = "alert";
+      div.innerHTML =
+        "<strong>안녕하세요!</strong> 중요 메세지를 수신하셨습니다.";
+      setTimeout(() => {
+        constainer.append(div);
+      }, 2000);
+      setTimeout(() => {
+        div.remove(), 3000;
+      }, 2000);
+    </script>
+  </body>
+</html>

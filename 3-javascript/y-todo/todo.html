@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  
+
+    <title>할 일 관리</title>
+  </head>
+  <body style="width: 500px" class="mx-auto">
+    <h2 class="text-center mt-5">Hello, world!</h1>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script> -->
+   
+    <form id="form-input" class="d-flex" onsubmit="return false">
+      <!-- 입력 예시 -->
+    <input id="txt-memo" 
+    type="text" 
+    class="form-control me-2" 
+    placeholder="할 일..."/>
+    <button id="btn-add" type="button" class="btn btn-primary text-nowrap">
+      추가
+    </button>
+  </form>
+  <ul id="ul-list" class="list-group list-group-flush mt-3">
+    <!-- <li class="list-group-item">An item<button class="btn btn-secondary btn-sm">삭제</button></li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li> -->
+  </ul>
+  <script>
+    const txtMemo = document.querySelector("#txt-memo");
+    const btnAdd = document.querySelector("#btn-add");
+    const ulList = document.querySelector("#list");
+
+    console.log(txtMemo);
+
+    // 입력박스에 키보드 이벤트 추가
+   txtMemo.addEventListener=("keyup", (event)=>{
+      if(event.keyCode==13){
+        add(event);
+      }
+    });
+
+    // 버튼에 이벤트 추가
+    btnAdd.addEventListener("click", add);
+
+    function add(event){
+      if(event.keyCode){
+        console.log("키보드 이벤트 입니다.")
+      }else{
+        console.log("마우스포인터 이벤트입니다.")
+      }
+      console.log(event)
+      console.log(txtMemo).value;
+    }
+
+    btnAdd.addEventListener("click", add);
+
+function add(event){
+  console.log(txtMemo.value);
+
+  if(!txtMemo.value){
+    const alertDiv=/*html*/`
+    <div class="alert alert-danger alert dismissible mt-2" role="alert">
+      입력값을 입력해주세요
+      <button type="button" class="btn-close" data-bs-dismiss="alert">
+        </div>
+        `;
+formInput.insertAdjacentHTML("afterend", alertDiv);
+
+return;
+  }
+const li = /*html*/`
+<li class= "list-group-item">
+  <button class="btn btn-outline-secondary btn-sm">삭제</button>
+  ${txtMemo.value}
+  </li>
+  `
+}
+function remove(event){
+  if(event.target.className.includes("remove")){
+    const btnRemove=event.target;
+    const li = btnRemove.parentNode;
+    console.log(btnRemove.parentNode);
+    
+  }
+}
+  </script>
+  </body>
+</html>

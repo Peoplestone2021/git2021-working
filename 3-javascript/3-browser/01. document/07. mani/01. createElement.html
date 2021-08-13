@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <style>
+      .alert {
+        padding: 15px;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+    </style>
+    <div id="container">
+      <div>another 태그</div>
+    </div>
+    <script>
+      // document.createElement(태그)
+      // 1. 해당 태그의 요소를 생성
+      let div = document.createElement("div");
+
+      // 2. 해당요소의 속성들을 설정함
+      div.className = "alert";
+
+      // 3. 해당 요소의 내용을 채워넣음
+      div.innerHTML =
+        "<strong>안녕하세요!</strong> 중요 메세지를 수신하셨습니다.";
+
+      // 4. 어떤 요소에 만든 요소를 삽입함
+      const container = document.querySelector("#container");
+      setTimeout(() => {
+        constainer.append(div);
+        // constainer.prepend(div);
+        // constainer.before(div);
+        // constainer.after(div);
+      }, 2000);
+    </script>
+  </body>
+</html>
