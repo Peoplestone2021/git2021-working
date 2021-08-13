@@ -16,6 +16,17 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol
+        id="exclamation-triangle-fill"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+        />
+      </symbol>
+    </svg>
 
     <title>contact_양민석</title>
   </head>
@@ -43,7 +54,7 @@
         style="width: 30%"
       />
       <input
-        id="input-email"
+        id="input-e-mail"
         type="txt"
         class="form-control me-2"
         placeholder="e메일"
@@ -60,28 +71,182 @@
           <th scope="col">이름</th>
           <th scope="col">전화번호</th>
           <th scope="col">e-메일</th>
+          <th scope="col" style="width: 10%">수정</th>
         </tr>
       </thead>
-      <!-- <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+      <tbody id="tr-list"></tbody>
+      <tfoot id="tfoot">
+        <tr id="empty">
+          <td colspan="5" class="text-center">데이터를 입력해 주세요.</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody> -->
+      </tfoot>
     </table>
-    <script></script>
+
+    <script>
+      const userName = document.querySelector("#input-name");
+      const userPhoneNum = document.querySelector("#input-phone-num");
+      const userEmail = document.querySelector("#input-e-mail");
+      const btnAdd = document.querySelector("#btn-add");
+      const trList = document.querySelector("#tr-list");
+      const formInput = document.querySelector("#form-input");
+      const empty = document.querySelector("#empty");
+      let nameRegExp = /^[가-힣a-zA-Z]+$/;
+      let numRegExp = /^[0-9+-]+$/;
+      let emailRegExp = /^[0-9a-zA-Z가-힣@_\.-]+$/;
+
+      userName.addEventListener("keyup", (event) => {
+        if (event.keyCode == 13) {
+          userName.blur();
+          add(event);
+        }
+      });
+      userPhoneNum.addEventListener("keyup", (event) => {
+        if (event.keyCode == 13) {
+          userPhoneNum.blur();
+          add(event);
+        }
+      });
+      userEmail.addEventListener("keyup", (event) => {
+        if (event.keyCode == 13) {
+          userEmail.blur();
+          add(event);
+        }
+      });
+
+      btnAdd.addEventListener("click", add);
+
+      trList.addEventListener("click", remove);
+
+      let tnum = 0;
+
+      function add(event) {
+        console.log(userName.value);
+        console.log(userPhoneNum.value);
+        console.log(userEmail.value);
+        if (!userName.value || !userPhoneNum.value || !userEmail.value) {
+          const alertForm = /*html*/ `
+          <div class="alert alert-danger d-flex align-items-center alert-dismissible my-2" role="alert" id="liveAlert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+            이름, 전화번호, e-mail을 모두 입력해야 합니다.
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          `;
+          formInput.insertAdjacentHTML("afterend", alertForm);
+          return;
+          // userName 문자가 아닐 경우
+          // 올바른 이름을 확인해주세요. 숫자나 기호는 입력할 수 없습니다.
+        } else if (
+          !nameRegExp.test(userName.value)
+          //  ||
+          // userName.value !== /^[a-zA-z]+$/
+        ) {
+          const alertFormName = /*html*/ `
+          <div class="alert alert-danger d-flex align-items-center alert-dismissible my-2" role="alert" id="liveAlert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+           올바른 이름을 확인해주세요. 숫자나 기호, 띄어쓰기는 입력할 수 없습니다.
+
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          `;
+          formInput.insertAdjacentHTML("afterend", alertFormName);
+          return;
+          // userPhoneNum 숫자 || - || + 가 아닐 경우
+          // 전화번호를 확인해주세요. 숫자나 -, +(해외일 경우) 만 가능합니다.
+        } else if (
+          !numRegExp.test(userPhoneNum.value)
+          //  ||
+          // userName.value !== /^[a-zA-z]+$/
+        ) {
+          const alertFormNum = /*html*/ `
+          <div class="alert alert-danger d-flex align-items-center alert-dismissible my-2" role="alert" id="liveAlert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+              전화번호를 확인해주세요. 숫자나 -, +(해외일 경우) 만 가능합니다.
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          `;
+          formInput.insertAdjacentHTML("afterend", alertFormNum);
+          return;
+        } else if (
+          !emailRegExp.test(userEmail.value)
+          //  ||
+          // userName.value !== /^[a-zA-z]+$/
+        ) {
+          const alertFormEmail = /*html*/ `
+          <div class="alert alert-danger d-flex align-items-center alert-dismissible my-2" role="alert" id="liveAlert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+              올바른 e-mail 주소를 확인해주세요.
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          `;
+          formInput.insertAdjacentHTML("afterend", alertFormEmail);
+          return;
+        }
+
+        // userEmail @ || . 없는 경우
+        // 올바른 e-mail 주소를 확인해주세요.
+        // email 검증 정규식 필요
+
+        // 이 부분을 수정
+
+        const tr = /*html*/ `
+        <tr>
+          <td scope="row">${tnum + 1}</td>
+          <td>${userName.value}</td>
+          <td>${userPhoneNum.value}</td>
+          <td>${userEmail.value}</td>
+          <td><button class="btn btn-outline-secondary btn-sm remove">삭제</button>
+            </td>
+            </tr>
+            `;
+
+        trList.insertAdjacentHTML("afterbegin", tr);
+
+        formInput.reset();
+        tnum = tnum + 1;
+        let elem = document.querySelectorAll("td");
+        if (elem.length !== 0) {
+          empty.style.display = "none";
+        }
+        // console.log(elem);
+        // console.log(elem.length);
+      }
+
+      function remove(event) {
+        if (event.target.className.includes("remove")) {
+          const btnRemove = event.target;
+          const td = btnRemove.parentNode;
+          const tr = td.parentNode;
+          tr.remove();
+        }
+      }
+
+      // if (isNotEmpty !== null) {
+      //   empty.style.display = "none";
+      // }
+
+      // verifyEmail = function () {
+      //   // 이메일 검증 스크립트 작성
+      //   var emailVal = $("#email").val();
+      //   var regExp =
+      //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      //   if (emailVal.match(regExp) != null) {
+      //   } else {
+      //     const alertEmail = /*html*/ `
+      //     <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
+      //       올바른 e-mail 주소를 확인해주세요.
+      //       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      //     </div>
+      //     `;
+      //   }
+      // };
+    </script>
   </body>
 </html>
