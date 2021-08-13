@@ -1,7 +1,6 @@
 <html>
-  <title>property-2</title>
   <body>
-    <a name="list">the list</a>
+    <a name="list">The list:</a>
     <ul>
       <li><a href="http://google.com">http://google.com</a></li>
       <li><a href="/tutorial">/tutorial.html</a></li>
@@ -12,16 +11,15 @@
     </ul>
 
     <script>
-      // setting style for a single link
-      // let link = document.querySelector("a");
       const links = document.querySelectorAll("ul a");
       console.log(links);
 
       for (let link of links) {
         const href = link.getAttribute("href");
         console.log(href);
-        if (href.includes("://") && !href.includes("http://internal.com"))
+        if (href.includes("://") && !href.includes("http://internal.com")) {
           link.style.color = "orange";
+        }
       }
     </script>
   </body>
