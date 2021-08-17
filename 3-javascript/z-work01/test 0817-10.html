@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <input id="input" type="text"></input>
+    <button id="btn-add">입력</button>
+    <script>
+      const btn = document.querySelector("#btn-add");
+      const input = document.querySelector("#input");
+      
+      btn.addEventListener("click", click)
+      
+      function click(event){
+        alert(input.value);
+        input.value='';
+      }
+
+    </script>
+  </body>
+</html>

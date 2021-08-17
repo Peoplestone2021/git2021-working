@@ -1,0 +1,23 @@
+<html>
+  <body>
+    <textarea placeholder="Write here"></textarea>
+    <button>Clear</button>
+    <script>
+      const txt = document.querySelector("textarea");
+      const btn = document.querySelector("button");
+      const storageKey = "memo";
+
+      // 텍스트 입력할 때 마다 이벤트 처리
+      txt.addEventListner("keyup", () => {
+        localStorage.setItem(storageKey, txt.value);
+      });
+
+      btn.addEventListner("click", () => {
+        txt.value = "";
+        localStorage.removeItem(storageKey);
+      });
+
+      txt.value = localStorage.getItem(storageKey);
+    </script>
+  </body>
+</html>

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko">
   <head>
     <!-- Required meta tags -->
@@ -16,7 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
-    <title>할 일 관리 explain</title>
+    <title>할 일 관리</title>
   </head>
 
   <body style="width: 500px" class="mx-auto">
@@ -45,7 +44,7 @@
     <ul id="ul-list" class="list-group list-group-flush mt-3"></ul>
 
     <script>
-      /* 요소 선택 부분 */
+      // /* 요소 선택 부분 */
       const txtMemo = document.querySelector("#txt-memo");
       const btnAdd = document.querySelector("#btn-add");
       const ulList = document.querySelector("#ul-list");
@@ -77,24 +76,38 @@
         // 빈 값일 때 에러 메시지 처리
         if (!txtMemo.value) {
           const alertDiv = /*html*/ `
-          <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
-            입력값을 입력해주세요.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>    
-          `;
+                        <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
+                          입력값을 입력해주세요.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        `;
           formInput.insertAdjacentHTML("afterend", alertDiv);
 
           return;
         }
 
+        // 로컬 스토리지에 데이터를 추가
+        // 로컬 스토리지에서 전체 데이터를 가져온 후
+        // 입력된 데이터를 추가
+        // 기존 데이터 조회 -> 추가
+
+        // 로컬 스토리지에 저장
+        // setData(data)=getData();
+        // 데이터의 id(유일값) 생성
+        const id = data.length > 0 ? data[0].id + 1 : 1;
+        // 데이터의 가장 앞쪽에 추가함
+        data.unshift({ id, memo: txtMemo.value });
+        // 로컬 스토리지에 저장
+        setData(data);
+
         // 생성할 템플릿 문자열
         // 삭제 버튼에 remove라는 임의의 클래스를 넣음
         const li = /*html*/ `
-        <li class="list-group-item">
-          <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
-          ${txtMemo.value}
-        </li>
-        `;
+                      <li class="list-group-item">
+                        <button class="btn btn-outline-secondary btn-sm remove">삭제</button>
+                        ${txtMemo.value}
+                      </li>
+                      `;
 
         // ul 요소에 추가
         ulList.insertAdjacentHTML("afterbegin", li);
@@ -111,6 +124,19 @@
           const btnRemove = event.target;
           // 삭제버튼의 부모 노드인 li
           const li = btnRemove.parentNode;
+          console.log(li.dataset.id);
+
+          // 로컬 스토리지의 특정 데이터를 삭제
+          // 1. 로컬 스토리지에서 전체 데이터 읽어오기
+          // 2. 특정 데이터만 제거
+          // 3. 로컬 스토리지에 전체데이터 저장
+
+          // 데이터 가져오기
+          // const data=getData();
+          // 특정 데이터 제거
+          const newData = data.filter((item) => item.id != li.dataset.id);
+          setData(newData);
+          // 태그를 삭제
           li.remove();
         }
       }

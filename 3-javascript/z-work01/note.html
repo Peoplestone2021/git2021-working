@@ -1,20 +1,16 @@
 <html>
+  <title>Note</title>
   <body>
-    <body>
-      <div id="elem" about="Elephant"></div>
-    
-      <script>
-        console.log( elem.getAttribute('About') ); // (1) 'Elephant', 속성 읽기
-    
-        elem.setAttribute('Test', 123); // (2) 속성 추가하기
-    
-        console.log( elem.outerHTML ); // (3) 추가된 속성 확인하기
-    
-        for (let attr of elem.attributes) { // (4) 속성 전체 나열하기
-          console.log( `${attr.name} = ${attr.value}` );
-        }
-      </script>
-    </body>
+    <script>
+      let key = 1;
+      localStorage.setItem(key++, 1);
+      localStorage.setItem(key++, 2);
+      console.log(localStorage.getItem("test")); // 1
+
+      for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        console.log(`${key}: ${localStorage.getItem(key)}`);
+      }
     </script>
   </body>
 </html>

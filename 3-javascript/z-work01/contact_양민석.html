@@ -90,6 +90,7 @@
       const trList = document.querySelector("#tr-list");
       const formInput = document.querySelector("#form-input");
       const empty = document.querySelector("#empty");
+
       let nameRegExp = /^[가-힣a-zA-Z]+$/;
       let numRegExp = /^[0-9+-]+$/;
       let emailRegExp = /^[0-9a-zA-Z가-힣@_\.-]+$/;
@@ -120,9 +121,10 @@
       let tnum = 0;
 
       function add(event) {
-        console.log(userName.value);
-        console.log(userPhoneNum.value);
-        console.log(userEmail.value);
+        // console.log(userData);
+        // console.log(userName.value);
+        // console.log(userPhoneNum.value);
+        // console.log(userEmail.value);
         if (!userName.value || !userPhoneNum.value || !userEmail.value) {
           const alertForm = /*html*/ `
           <div class="alert alert-danger d-flex align-items-center alert-dismissible my-2" role="alert" id="liveAlert">
@@ -206,6 +208,11 @@
             `;
 
         trList.insertAdjacentHTML("afterbegin", tr);
+        const userData = [userName.value, userPhoneNum.value, userEmail.value];
+        userData.oninput = () => {
+          let userKey = 0;
+          localStorage.setItem(userKey++, userData.value);
+        };
 
         formInput.reset();
         tnum = tnum + 1;

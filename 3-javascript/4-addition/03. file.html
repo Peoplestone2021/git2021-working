@@ -1,0 +1,42 @@
+<html>
+  <body>
+    <!-- 특정파일 종류만 선택하게 함 -->
+    <!-- accept="파일종류1, 파일종류2..." -->
+    <!-- 파일종류 형식: MIME type -->
+    <!-- MIME Type: 파일의 형식을 표기하는 국제 표준 방식 -->
+    <!-- https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types -->
+    <input type="file" accept="image/png, image/jpeg, video/mp4" />
+    <button>Preview</button>
+    <script>
+      const fileInput = document.querySelector("input[type='file']");
+
+      const btn = document.querySelector("button");
+      btn.addEventListener("click", () => {
+        // 파일 입력요소.files -> 선택한 파일 목록
+        console.log(fileInput.files[0]);
+        const file = fileInput.files[0];
+
+        // 파일을 base64 문자열 -> data url로 변환
+        // FileReader를 이용하여 처리
+        const reader = new FileReader();
+
+        // file객체를 data url로 읽기
+        reader.readAsDataURL(file);
+
+        // FileReader객체가 파일 읽기를 완료하면 함수가 실행됨
+        reader.onload = () => {
+          console.log(reader.result);
+
+          let elm = "";
+          if (file.type.includes("image")) {
+            elm = `<img src=${reader.result} width="500>`;
+          } else {
+            elm = `<video src=${reader.result} width="500 controls>`;
+          }
+          // const img = `<img src=${reader.result} width="500>`;
+          // div.innerHTML = img;
+        };
+      });
+    </script>
+  </body>
+</html>
