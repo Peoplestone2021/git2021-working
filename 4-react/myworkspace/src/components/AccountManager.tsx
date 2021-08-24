@@ -19,9 +19,10 @@ const ListItem = ({ key, history }: { key: number; history: number }) => {
 const AccountManager = () => {
   const [history, setHistory] = useState([]);
   const deposit = () => {
-    const dep = parseInt(prompt("입금하실 금액을 입력해주세요.", 10));
-
-    setHistory([dep, ...history]);
+    // let dep: any;
+    const dep = prompt("입금하실 금액을 입력해주세요.");
+    console.log(dep);
+    setHistory([]);
   };
   const withdraw = () => {
     prompt("출금하실 금액을 입력해주세요.");
