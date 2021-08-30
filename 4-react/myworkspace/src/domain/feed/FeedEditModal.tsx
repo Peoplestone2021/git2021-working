@@ -1,6 +1,9 @@
-import { clear } from "console";
-import { useRef } from "react";
+// import { clear } from "console";
+import { useRef, useState } from "react";
 import { FeedState } from "./type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import produce from "immer";
 
 // { 함수속성 }
 // 함수속성의 타입: (매개변수타입) => 리턴타입
@@ -14,45 +17,104 @@ interface ModalProp {
 }
 
 const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
+  const profile = useSelector((state: RootState) => state.profile);
+
+  // const [feedList, setFeedList] = useState<FeedState[]>([]); // test
+
   const modalTxtRef = useRef<HTMLTextAreaElement>(null);
   const modalFileRef = useRef<HTMLInputElement>(null);
-  // if (!txtRef) return;
 
-  const save = () => {
-    if (modalFileRef.current?.files?.length) {
-      const file = modalFileRef.current?.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        post(reader.result?.toString(), file.type);
-      };
-    } else {
-      post(undefined, undefined);
-    }
-  };
-  const post = (
-    dataUrl: string | undefined,
-    fileType: string | undefined
-    // modifyTime: number
-  ) => {
-    const feed: FeedState = {
-      id: item.id,
-      content: modalTxtRef.current?.value, // 수정된 입력값
-      dataUrl: dataUrl,
-      fileType: fileType?.toString(),
-      createTime: new Date().getTime(),
-      // modifyTime: modifyTime,
-    };
-    console.log("feed" + feed);
-    onSave(feed);
-  };
+  const [isModified, setModified] = useState(false);
 
   const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
     if (e) {
       if (e.code !== "Enter") return;
     }
+    if (modalFileRef.current?.files?.length) {
+      const file = modalFileRef.current?.files[0];
+      const reader = new FileReader();
+      const username = profile.username;
+      reader.readAsDataURL(file);
+      // const dataUrl = reader.result;
+
+      reader.onload = () => {
+        replace(reader.result?.toString(), file.type);
+      };
+    } else {
+      replace(undefined, undefined);
+    }
+    setModified(true);
   };
+
+  const replace = (
+    dataUrl: string | undefined,
+    fileType: string | undefined
+  ) => {
+    const feed: FeedState = {
+      id: item.id,
+      userimg: item.userimg,
+      username: item.username,
+      content: item.content, // 수정된 입력값
+      dataUrl: dataUrl,
+      fileType: fileType?.toString(),
+      createTime: item.createTime,
+    };
+    onSave(feed);
+  };
+
+  // const save = (editItem: FeedState) => {
+  //     console.log(editItem);
+  //   };
+
+  const save = () => {
+    const feed: FeedState = {
+      id: item.id,
+      userimg: item.userimg,
+      username: item.username,
+      content: modalTxtRef.current?.value,
+      dataUrl: item.dataUrl,
+      fileType: item.fileType,
+      createTime: item.createTime,
+      modifyTime: new Date().getTime(),
+    };
+    onSave(feed);
+  };
+
+  // setFeedList(
+  //   produce((state) => {
+  //     const item = state.find((item) => item.id === editItem.id);
+  //     if (item) {
+  //       // item.id = editItem.id;
+  //       // item.userimg=editItem.userimg;
+  //       item.content = editItem.content;
+  //       // item.dataUrl = editItem.dataUrl;
+  //       // item.fileType = editItem.fileType;
+  //       item.modifyTime = new Date().getTime();
+  //       item.isModified = false;
+  //     }
+  //   })
+  // );
+  //   fileType: string | undefined,)
+
+  // const post = (
+  //   dataUrl: string | undefined,
+  //   fileType: string | undefined,
+  //   // username: string | undefined
+  //   // modifyTime: number
+  // ) => {
+  //   const feed: FeedState = {
+  //     id: item.id,
+  //     userimg: item.userimg,
+  //     username: item.username,
+  //     content: modalTxtRef.current?.value, // 수정된 입력값
+  //     dataUrl: dataUrl,
+  //     fileType: fileType?.toString(),
+  //     // createTime: new Date().getTime(),
+  //     modifyTime: new Date().getTime(),
+  //   };
+  //   console.log("feed" + feed);
+  //   onSave(feed);
+  // };
 
   return (
     <div
@@ -77,20 +139,38 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
           </div>
           <div className="modal-body">
             {/* 이부분 확인 필요 */}
-            <div defaultValue={item.dataUrl}>
-              {item.fileType &&
-                (item.fileType?.includes("image") ? (
-                  <img
-                    src={item.dataUrl}
-                    className="card-img-top"
-                    alt={item.content}
-                  />
-                ) : (
-                  <video className="card-img-top" controls>
-                    <source src={item.dataUrl} type="video/mp4"></source>
-                  </video>
-                ))}
-            </div>
+            {!isModified && (
+              <div defaultValue={item.dataUrl}>
+                {item.fileType &&
+                  (item.fileType?.includes("image") ? (
+                    <img
+                      src={item.dataUrl}
+                      className="card-img-top"
+                      alt={item.content}
+                    />
+                  ) : (
+                    <video className="card-img-top" controls>
+                      <source src={item.dataUrl} type="video/mp4"></source>
+                    </video>
+                  ))}
+              </div>
+            )}
+            {isModified && (
+              <div>
+                {item.fileType &&
+                  (item.fileType?.includes("image") ? (
+                    <img
+                      src={item.dataUrl}
+                      className="card-img-top"
+                      alt={item.content}
+                    />
+                  ) : (
+                    <video className="card-img-top" controls>
+                      <source src={item.dataUrl} type="video/mp4"></source>
+                    </video>
+                  ))}
+              </div>
+            )}
             <div className="d-flex mb-1">
               <input
                 type="file"

@@ -1,9 +1,9 @@
-interface TodoState {
+// 1건에 대한 타입
+interface TodoItemState {
   id: number;
   memo: string | undefined;
+  username: string | undefined;
   createTime: number;
-  modifyTime?: number;
-  isEdit?: boolean; // 수정모드인지 여부
 }
 
-export type { TodoState };
+export type { TodoItemState };

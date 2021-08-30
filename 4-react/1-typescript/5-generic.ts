@@ -8,5 +8,13 @@ function identity<Type>(arg: Type): Type {
   return arg;
 }
 
+const exam = () => {
+  return 1 + 2;
+};
+
 let output1 = identity<string>("Typescript");
 let output2 = identity<number>(1);
+// let output3 = identity<string>(exam());
+
+console.log("output1 " + output1);
+console.log("output2 " + output2);

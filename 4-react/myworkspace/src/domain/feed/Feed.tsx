@@ -3,13 +3,22 @@ import Alert from "../../components/base/Alert";
 import produce from "immer";
 import FeedEditModal from "./FeedEditModal";
 import { FeedState } from "./type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import style from "./Feed.module.scss";
 
 const getTimeString = (unixtime: number) => {
   const dateTime = new Date(unixtime);
-  return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+  const day = 24 * 60 * 60 * 1000;
+  return unixtime - new Date().getTime() >= day
+    ? dateTime.toLocaleDateString()
+    : dateTime.toLocaleTimeString();
+  // return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
 };
 
 const Feed = () => {
+  const profile = useSelector((state: RootState) => state.profile);
+
   const [feedList, setFeedList] = useState<FeedState[]>([]);
 
   const txtRef = useRef<HTMLTextAreaElement>(null);
@@ -33,23 +42,32 @@ const Feed = () => {
     if (fileRef.current?.files?.length) {
       const file = fileRef.current?.files[0];
       const reader = new FileReader();
+      const userimg = profile.image;
+      const username = profile.username;
 
       reader.onload = () => {
-        post(reader.result?.toString(), file.type);
+        post(reader.result?.toString(), file.type, userimg, username);
       };
       reader.readAsDataURL(file);
     } else {
-      post(undefined, undefined);
+      post(undefined, undefined, undefined, undefined);
     }
     // const dataUrl = reader.result;
 
     // if (!dataUrl) return;
   };
 
-  const post = (dataUrl: string | undefined, fileType: string | undefined) => {
+  const post = (
+    dataUrl: string | undefined,
+    fileType: string | undefined,
+    userimg: string | undefined,
+    username: string | undefined
+  ) => {
     const feed: FeedState = {
       id: feedList.length > 0 ? feedList[0].id + 1 : 1,
       // optional chaning
+      userimg: profile.image,
+      username: profile.username,
       content: txtRef.current?.value,
       dataUrl: dataUrl,
       fileType: fileType?.toString(),
@@ -72,6 +90,8 @@ const Feed = () => {
 
   const editItem = useRef<FeedState>({
     id: 0,
+    userimg: "",
+    username: profile.username,
     content: "",
     dataUrl: "",
     fileType: "",
@@ -168,6 +188,13 @@ const Feed = () => {
           )}
           {feedList.map((item) => (
             <div className="card d-flex" key={item.id}>
+              <div className="card-header d-flex">
+                <div
+                  className={`${style.thumb} me-2 mt-0`}
+                  style={{ backgroundImage: `url(${item.userimg})` }}
+                ></div>
+                {item.username}
+              </div>
               {item.fileType &&
                 (item.fileType?.includes("image") ? (
                   <img
@@ -186,8 +213,7 @@ const Feed = () => {
                   <div className="w-100">
                     <span className="text-secondary">
                       {getTimeString(
-                        // item.modifyTime?item.modifyTime:
-                        item.createTime
+                        item.modifyTime ? item.modifyTime : item.createTime
                       )}
                     </span>
                   </div>

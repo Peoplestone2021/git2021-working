@@ -55,6 +55,8 @@ const Contact = () => {
       tbRef.current?.querySelectorAll("phone-number")[index];
     const inputEmail = tbRef.current?.querySelectorAll("input")[index];
     console.log("console.inputName" + inputName);
+    console.log("console.inputPhoneNumber" + inputPhoneNumber);
+    console.log("console.inputEmail" + inputEmail);
     setContactList(
       produce((state) => {
         const item = state.find((item) => item.id === id);
