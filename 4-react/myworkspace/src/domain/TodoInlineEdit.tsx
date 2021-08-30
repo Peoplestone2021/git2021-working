@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Alert from "./base/Alert";
+import Alert from "../components/base/Alert";
 
 import produce from "immer";
 

@@ -7,8 +7,8 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-import Home from "./components/Home";
-import Navigation from "./components/Navigation";
+import Home from "./domain/Home";
+import Navigation from "./domain/Navigation";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -18,14 +18,14 @@ import Navigation from "./components/Navigation";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Counter = lazy(() => import("./components/Counter"));
-const Calculator = lazy(() => import("./components/CalculatorRef"));
-const Generator = lazy(() => import("./components/Generator"));
-const AccountManager = lazy(() => import("./components/AccountManagerRef"));
-const Components = lazy(() => import("./components/Components"));
-const BootStrap = lazy(() => import("./components/Bootstrap"));
-const Todo = lazy(() => import("./components/Todo"));
-const Feed = lazy(() => import("./components/Feed"));
+const Counter = lazy(() => import("./domain/Counter"));
+const Calculator = lazy(() => import("./domain/CalculatorRef"));
+const Generator = lazy(() => import("./domain/Generator"));
+const AccountManager = lazy(() => import("./domain/AccountManagerRef"));
+const Components = lazy(() => import("./domain/Components"));
+const BootStrap = lazy(() => import("./domain/Bootstrap"));
+const Todo = lazy(() => import("./domain/todo/Todo"));
+const Feed = lazy(() => import("./domain/feed/Feed"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
