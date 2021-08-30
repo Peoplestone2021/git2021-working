@@ -222,7 +222,7 @@ const Feed = () => {
                     onClick={() => {
                       edit(item);
                     }}
-                    className="link-secondary fs-6 text-nowrap"
+                    className="link-secondary fs-6 text-nowrap me-3"
                   >
                     수정
                   </a>
