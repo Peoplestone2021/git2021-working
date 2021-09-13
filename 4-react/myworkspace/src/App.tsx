@@ -6,8 +6,8 @@
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import { Provider } from "react-redux"; // react 앱에 redux store를 제공해줌
+import { store } from "./store"; // redux store
 
 import Home from "./domain/Home";
 import Profile from "./domain/profile/Profile";
@@ -21,9 +21,14 @@ import Profile from "./domain/profile/Profile";
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
 const Todo = lazy(() => import("./domain/todo/Todo"));
-const TodoWithModal = lazy(() => import("./domain/todo/TodoEditModal"));
 const Feed = lazy(() => import("./domain/feed/Feed"));
+const Photo = lazy(() => import("./domain/photo/Photo"));
+const PhotoCreate = lazy(() => import("./domain/photo/PhotoCreate"));
+const PhotoDetail = lazy(() => import("./domain/photo/PhotoDetail"));
+const PhotoEdit = lazy(() => import("./domain/photo/PhotoEdit"));
 const Contact = lazy(() => import("./domain/contact/Contact"));
+const ContactDetail = lazy(() => import("./domain/contact/ContactDetail"));
+const ContactEdit = lazy(() => import("./domain/contact/ContactEdit"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -32,12 +37,11 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar bg-primary shadow d-flex justify-content-end">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-primary shadow">
             <Profile />
           </header>
-          {/* <div style={{ width: "700px" }} className="mx-auto"> */}
           <nav className="drawer-menu position-fixed bg-light shadow-sm">
-            <h3 className="ms-2">My WorkSpace</h3>
+            <h3 className="ms-2">MY WORKSPACE</h3>
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -46,13 +50,13 @@ function App() {
                 <Link to="/todo">Todo</Link>
               </li>
               <li>
-                <Link to="/todowithmodal">TodoWithModal</Link>
-              </li>
-              <li>
                 <Link to="/feeds">Feeds</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="/photos">Photos</Link>
+              </li>
+              <li>
+                <Link to="/contacts">Contacts</Link>
               </li>
             </ul>
           </nav>
@@ -64,11 +68,19 @@ function App() {
                 {/* Switch 영역에 컴포넌트가 로딩됨 */}
 
                 {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
+                {/* exact: 속성은 true/false, 경로가 정확히 일치할때만 */}
                 <Route path="/" component={Home} exact />
                 <Route path="/todo" component={Todo} />
-                <Route path="/todowithmodal" component={TodoWithModal} />
                 <Route path="/feeds" component={Feed} />
-                <Route path="/contact" component={Contact} />
+                <Route path="/photos" component={Photo} exact />
+                <Route path="/photos/create" component={PhotoCreate} />
+                {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
+                <Route path="/photos/:id" component={PhotoDetail} exact />
+                <Route path="/photos/edit/:id" component={PhotoEdit} />
+                <Route path="/photos/detail/:id" component={PhotoDetail} />
+                <Route path="/contacts" component={Contact} />
+                <Route path="/contacts/detail/:id" component={ContactDetail} />
+                <Route path="/contacts/edit/:id" component={ContactEdit} />
               </Switch>
             </Suspense>
           </main>

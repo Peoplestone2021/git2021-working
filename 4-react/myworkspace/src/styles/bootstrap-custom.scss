@@ -1,5 +1,5 @@
+// @import "~bootstrap/scss/bootstrap.scss";
 // @import "~bootstrap/scss/bootstrap.scss"
-
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "~bootstrap/scss/functions";
 
@@ -33,6 +33,9 @@ $border-radius-sm: 0;
 @import "~bootstrap/scss/utilities";
 /* ---------------------------------------------- */
 // Layout & Components
+
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/card";
 @import "~bootstrap/scss/forms";
@@ -46,3 +49,4 @@ $border-radius-sm: 0;
 
 // 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
 @import "~bootstrap/scss/utilities/api";
+@import "~bootstrap-icons/font/bootstrap-icons.css";

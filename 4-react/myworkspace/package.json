@@ -14,6 +14,7 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
     "bootstrap": "^5.1.0",
+    "bootstrap-icons": "^1.5.0",
     "immer": "^9.0.5",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -i \"myworkspace.pem\" ubuntu@ec2-13-125-218-233.ap-northeast-2.compute.amazonaws.com"
   },
   "eslintConfig": {
     "extends": [

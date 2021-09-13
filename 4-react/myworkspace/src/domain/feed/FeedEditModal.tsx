@@ -1,9 +1,9 @@
 // import { clear } from "console";
 import { useRef, useState } from "react";
 import { FeedState } from "./type";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import produce from "immer";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../store";
+// import produce from "immer";
 
 // { 함수속성 }
 // 함수속성의 타입: (매개변수타입) => 리턴타입
@@ -17,7 +17,7 @@ interface ModalProp {
 }
 
 const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
-  const profile = useSelector((state: RootState) => state.profile);
+  // const profile = useSelector((state: RootState) => state.profile);
 
   // const [feedList, setFeedList] = useState<FeedState[]>([]); // test
 
@@ -33,7 +33,7 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
     if (modalFileRef.current?.files?.length) {
       const file = modalFileRef.current?.files[0];
       const reader = new FileReader();
-      const username = profile.username;
+      // const username = profile.username;
       reader.readAsDataURL(file);
       // const dataUrl = reader.result;
 

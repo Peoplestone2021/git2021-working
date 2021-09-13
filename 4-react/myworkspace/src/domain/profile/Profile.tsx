@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // redux state 조회할 수 있는 함수
 import { AppDispatch, RootState } from "../../store";
 import { saveProfile } from "./profileSlice";
-import { penguin } from "../../common/data";
+// import { penguin } from "../../common/data";
 
 // 모듈명(컴포넌트명).module.scss
 // 해당 컴포넌트에서만 사용할 스타일시트
