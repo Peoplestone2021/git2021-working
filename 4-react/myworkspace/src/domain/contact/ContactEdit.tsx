@@ -25,11 +25,11 @@ const ContactEdit = () => {
     if (contactItem) {
       const item = { ...contactItem };
       item.id = contactItem.id;
-      item.name = contactItem.name;
-      item.phoneNumber = contactItem.name;
-      item.eMail = contactItem.eMail;
-      item.memo = contactItem.memo;
-      item.createdTime = contactItem.createdTime;
+      item.name = name.current?.value;
+      item.phoneNumber = phoneNumber.current?.value;
+      item.eMail = eMail.current?.value;
+      item.memo = memo.current?.value;
+      item.createdTime = new Date().getTime();
       dispatch(modifyContact(item));
       history.push("/contacts");
     }

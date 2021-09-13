@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { addContact, ContactItem } from "./contactSlice";
 
@@ -14,31 +15,23 @@ const getTimeString = (unixtime: number) => {
 };
 
 const Contact = () => {
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
 
   const contact = useSelector((state: RootState) => state.contact);
+  const contactData = useSelector((state: RootState) => state.contact.data);
   const history = useHistory();
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const contactData = useSelector((state: RootState) => state.contact.data);
-
-  // const [contactList, setContactList] = useState<ContactState[]>([]);
   const nameRef = useRef<HTMLInputElement>(null);
   const numRef = useRef<HTMLInputElement>(null);
   const mailRef = useRef<HTMLInputElement>(null);
-  const tbRef = useRef<HTMLTableSectionElement>(null);
-  // const trRef = useRef<HTMLTableRowElement>(null);
-
-  const contactItem = useSelector((state: RootState) =>
-    state.contact.data.find((item) => item.id === +id)
-  );
 
   // console.log("1" + tbRef);
   // if (!tbRef) return;
 
-  let tnum = 0;
-  console.log(contactData.toString());
-  console.log(contactData[0]);
+  // console.log(contactData.toString());
+  // console.log(contactData[0]);
   const handleAddClick = () => {
     const item: ContactItem = {
       id: contactData.length > 0 ? contactData[0].id + 1 : 1,
@@ -47,7 +40,6 @@ const Contact = () => {
       eMail: mailRef.current?.value,
       createdTime: new Date().getTime(),
     };
-    tnum = tnum + 1;
     dispatch(addContact(item));
   };
 
@@ -95,7 +87,7 @@ const Contact = () => {
             추가
           </button>
         </form>
-        <table className="table table-striped-hover w-100">
+        <table className="table table-hover table-striped w-100">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -109,21 +101,14 @@ const Contact = () => {
             </tr>
           </thead>
           {contact.data.map((item, index) => (
-            <tbody key={`contact-item-${index}`} id="tr-list" ref={tbRef}>
+            <tbody key={`contact-item-${index}`} id="tr-list">
               <tr
-              // style={{ cursor: "pointer" }}
-              // onClick={() => {
-              //   history.push(`/contacts/detail/${item.id}`);
-              // }}
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  history.push(`/contacts/detail/${item.id}`);
+                }}
               >
-                <td
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    history.push(`/contacts/detail/${item.id}`);
-                  }}
-                >
-                  {item.id}
-                </td>
+                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.phoneNumber}</td>
                 <td>{item.eMail}</td>
@@ -131,15 +116,15 @@ const Contact = () => {
               </tr>
             </tbody>
           ))}
-          <tfoot id="tfoot">
-            {!contactItem && (
+          {!contactData.length && (
+            <tfoot id="tfoot">
               <tr id="empty">
                 <td colSpan={5} className="text-center">
                   데이터를 입력해 주세요.
                 </td>
               </tr>
-            )}
-          </tfoot>
+            </tfoot>
+          )}
         </table>
       </div>
     </>

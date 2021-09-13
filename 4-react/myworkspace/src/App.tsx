@@ -73,14 +73,27 @@ function App() {
                 <Route path="/todo" component={Todo} />
                 <Route path="/feeds" component={Feed} />
                 <Route path="/photos" component={Photo} exact />
-                <Route path="/photos/create" component={PhotoCreate} />
+                <Route path="/photos/create" component={PhotoCreate} exact />
                 {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
                 <Route path="/photos/:id" component={PhotoDetail} exact />
+                <Route
+                  path="/photos/detail/:id"
+                  component={PhotoDetail}
+                  exact
+                />
                 <Route path="/photos/edit/:id" component={PhotoEdit} />
-                <Route path="/photos/detail/:id" component={PhotoDetail} />
-                <Route path="/contacts" component={Contact} />
-                <Route path="/contacts/detail/:id" component={ContactDetail} />
-                <Route path="/contacts/edit/:id" component={ContactEdit} />
+                <Route path="/contacts" component={Contact} exact />
+                <Route path="/contacts/:id" component={ContactDetail} exact />
+                <Route
+                  path="/contacts/detail/:id"
+                  component={ContactDetail}
+                  exact
+                />
+                <Route
+                  path="/contacts/edit/:id"
+                  component={ContactEdit}
+                  exact
+                />
               </Switch>
             </Suspense>
           </main>
