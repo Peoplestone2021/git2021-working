@@ -7,8 +7,8 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-import Home from "./domain/Home";
-import Navigation from "./domain/Navigation";
+import Home from "./features/Home";
+import Navigation from "./features/Navigation";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -18,14 +18,14 @@ import Navigation from "./domain/Navigation";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Counter = lazy(() => import("./domain/Counter"));
-const Calculator = lazy(() => import("./domain/CalculatorRef"));
-const Generator = lazy(() => import("./domain/Generator"));
-const AccountManager = lazy(() => import("./domain/AccountManagerRef"));
-const Components = lazy(() => import("./domain/Components"));
-const BootStrap = lazy(() => import("./domain/Bootstrap"));
-const Todo = lazy(() => import("./domain/todo/Todo"));
-const Feed = lazy(() => import("./domain/feed/Feed"));
+const Counter = lazy(() => import("./components/example/state/Counter"));
+// const Calculator = lazy(() => import("./features/CalculatorRef"));
+// const Generator = lazy(() => import("./features/Generator"));
+// const AccountManager = lazy(() => import("./features/AccountManagerRef"));
+// const Components = lazy(() => import("./features/Components"));
+const BootStrap = lazy(() => import("./components/example/Bootstrap"));
+const Todo = lazy(() => import("./features/todo/Todo"));
+const Feed = lazy(() => import("./features/feed/Feed"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -48,11 +48,11 @@ function App() {
 
               {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
               <Route path="/" component={Home} exact />
-              <Route path="/components" component={Components} />
+              {/* <Route path="/components" component={Components} /> */}
               <Route path="/counter" component={Counter} />
-              <Route path="/calculator" component={Calculator} />
+              {/* <Route path="/calculator" component={Calculator} />
               <Route path="/generator" component={Generator} />
-              <Route path="/account-manager" component={AccountManager} />
+              <Route path="/account-manager" component={AccountManager} /> */}
               <Route path="/bootstrap" component={BootStrap} />
               <Route path="/todo" component={Todo} />
               <Route path="/feed" component={Feed} />
