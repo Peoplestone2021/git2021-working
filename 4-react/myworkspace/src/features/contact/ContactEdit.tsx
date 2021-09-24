@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
+import { requestModifyContact } from "./contactSaga";
 import { modifyContact } from "./contactSlice";
 
 const ContactEdit = () => {
@@ -12,12 +13,20 @@ const ContactEdit = () => {
     state.contact.data.find((item) => item.id === +id)
   );
 
+  const isModifyCompleted = useSelector(
+    (state: RootState) => state.contact.isModifyCompleted
+  );
+
   const dispatch = useDispatch<AppDispatch>();
 
   const name = useRef<HTMLInputElement>(null);
   const phoneNumber = useRef<HTMLInputElement>(null);
-  const eMail = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
   const memo = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    isModifyCompleted && history.push("/contacts");
+  }, [isModifyCompleted, history]);
 
   const handleSaveClick = () => {
     // 파일이 있을 때 처리
@@ -27,10 +36,10 @@ const ContactEdit = () => {
       item.id = contactItem.id;
       item.name = name.current?.value;
       item.phoneNumber = phoneNumber.current?.value;
-      item.eMail = eMail.current?.value;
+      item.email = email.current?.value;
       item.memo = memo.current?.value;
       item.createdTime = new Date().getTime();
-      dispatch(modifyContact(item));
+      dispatch(requestModifyContact(item));
       history.push("/contacts");
     }
     // redux store에 contact state에 item을 수정
@@ -70,8 +79,8 @@ const ContactEdit = () => {
                 <input
                   className="form-control"
                   style={{ height: "20vh" }}
-                  ref={eMail}
-                  defaultValue={contactItem?.eMail}
+                  ref={email}
+                  defaultValue={contactItem?.email}
                 ></input>
               </td>
             </tr>

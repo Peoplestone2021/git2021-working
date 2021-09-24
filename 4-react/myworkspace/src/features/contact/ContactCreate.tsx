@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
+import { requestAddContact } from "./contactSaga";
 import { ContactItem, addContact } from "./contactSlice";
 
 const ContactCreate = () => {
@@ -12,22 +13,30 @@ const ContactCreate = () => {
 
   const name = useRef<HTMLInputElement>(null);
   const phoneNumber = useRef<HTMLInputElement>(null);
-  const eMail = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
   const memo = useRef<HTMLTextAreaElement>(null);
   // const createdTime;
+
+  const isAddCompleted = useSelector(
+    (state: RootState) => state.contact.isAddCompleted
+  );
+
+  useEffect(() => {
+    isAddCompleted && history.push("/contacts");
+  }, [isAddCompleted, history, dispatch]);
 
   const handleAddClick = () => {
     const item: ContactItem = {
       id: contactData.length ? contactData[0].id + 1 : 1,
       name: name.current ? name.current.value : "",
       phoneNumber: phoneNumber.current ? phoneNumber.current.value : "",
-      eMail: eMail.current ? eMail.current.value : "",
+      email: email.current ? email.current.value : "",
       memo: memo.current?.value,
       createdTime: new Date().getTime(),
     };
 
     // redux store에 photo state에 item을 추가
-    dispatch(addContact(item));
+    dispatch(requestAddContact(item));
     // 포토 목록으로 이동
     history.push("/contacts");
   };
@@ -53,7 +62,7 @@ const ContactCreate = () => {
             <tr>
               <th>E-Mail</th>
               <td>
-                <input className="form-control" type="text" ref={eMail} />
+                <input className="form-control" type="text" ref={email} />
               </td>
             </tr>
             <tr>

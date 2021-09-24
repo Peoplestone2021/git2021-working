@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { removeContact } from "./contactSlice";
+import { requestRemoveContact } from "./contactSaga";
 
 const ContactDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,13 +13,21 @@ const ContactDetail = () => {
     state.contact.data.find((item) => item.id === +id)
   );
 
+  const isRemoveCompleted = useSelector(
+    (state: RootState) => state.contact.isRemoveCompleted
+  );
+
   console.log(contactItem);
 
   const history = useHistory();
   const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+    isRemoveCompleted && history.push("/contacts");
+  }, [isRemoveCompleted, history]);
+
   const handDeleteClick = () => {
-    dispatch(removeContact(+id)); // id값만 넣어서 삭제
+    dispatch(requestRemoveContact(+id)); // id값만 넣어서 삭제
     history.push("/contacts"); // 목록화면으로 이동
   };
 
@@ -41,7 +51,7 @@ const ContactDetail = () => {
             <tr>
               <th>e-Mail</th>
               <td>
-                <td>{contactItem.eMail}</td>
+                <td>{contactItem.email}</td>
               </td>
             </tr>
             <tr>

@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { removePhoto } from "./photoSlice";
+import { requestRemovePhoto } from "./photoSaga";
+// import { removePhoto } from "./photoSlice";
 
 const PhotoDetail = () => {
   // useParam<타입>(), 매개변수들을 객체화할 형식을 제너릭으로 넣어줌
@@ -9,7 +11,7 @@ const PhotoDetail = () => {
   // 타입에 따라서 처리를 다르게 하기위함
   // 객체지향 다형성(poly mophism): 같은 이름의 함수가 내부적으로 처리를 다르게 해줌
   const { id } = useParams<{ id: string }>();
-  console.log(id);
+  // console.log(id);
 
   // 타입 단언을 하지 않으면 추론에 의해서 PhotoItem | undefined 타입이 됨
   // 타입 단언을 하면 반환 형식을 정의할 수 있음
@@ -17,14 +19,24 @@ const PhotoDetail = () => {
     state.photo.data.find((item) => item.id === +id)
   ); // 반환형식을 타입 추론으로 처리
   // ) as PhotoItem; // 타입 단언 (type assertion)
-  console.log(photoItem);
+  // console.log(photoItem);
+
+  // 삭제 여부 감지 및 가져오기
+  const isRemoveCompleted = useSelector(
+    (state: RootState) => state.photo.isRemoveCompleted
+  );
 
   const history = useHistory();
   const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+    isRemoveCompleted && history.push("/photos");
+  }, [isRemoveCompleted, history]);
+
   const handDeleteClick = () => {
-    dispatch(removePhoto(+id)); // id값만 넣어서 삭제
-    history.push("/photos"); // 목록화면으로 이동
+    dispatch(requestRemovePhoto(+id)); // saga action으로 대체
+    // dispatch(removePhoto(+id)); // id값만 넣어서 삭제
+    // history.push("/photos"); // 목록화면으로 이동
   };
 
   return (
@@ -45,7 +57,11 @@ const PhotoDetail = () => {
             <tr>
               <th>이미지</th>
               <td>
-                <img src={photoItem.photoUrl} alt={photoItem.title} />
+                <img
+                  src={photoItem.photoUrl}
+                  alt={photoItem.title}
+                  width={"100%"}
+                />
               </td>
             </tr>
           </tbody>

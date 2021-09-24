@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Alert from "../../components/Alert";
+import Alert from "../../components/alert/Alert";
 
 import produce from "immer";
 
@@ -22,7 +22,6 @@ const getTimeString = (unixtime: number) => {
 };
 
 const Todo = () => {
-  console.log(process.env.REACT_APP_API_BASE);
   // todo 여러건에 대한 state
   // 참고) new Date().getTime() -> unix time 생성됨
   const [todoList, setTodoList] = useState<TodoItemState[]>([]);

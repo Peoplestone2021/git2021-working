@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Alert from "../../components/Alert";
+import Alert from "../../components/alert/Alert";
 
 import produce from "immer";
 
@@ -13,7 +13,7 @@ interface TodoItemState {
 }
 
 // 서버로 부터 받아오는 데이터 1건에 대한 타입
-interface TodoItemResponse {
+interface TodoItemReponse {
   id: number;
   memo: string;
   createdTime: number;
@@ -60,7 +60,7 @@ const Todo = () => {
     // resolve(해결함수)가 실행되기 전까지 대기
     // resolve가 실행되면 resolve함수의 매개변수를 반환함
     const res = await fetch("http://localhost:8080/todos");
-    const data: TodoItemResponse[] = await res.json();
+    const data: TodoItemReponse[] = await res.json();
 
     // 서버로부터 받은 데이터를 state 객체로 변환함
     const todos = data.map((item) => ({

@@ -1,19 +1,20 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { AppDispatch, RootState } from "../../store";
+import { requestFetchContacts } from "./contactSaga";
 // import { useParams } from "react-router-dom";
-import { RootState } from "../../store";
 // import { addContact, ContactItem } from "./contactSlice";
-import api from "./contactApi";
+// import api from "./contactApi";
 
-interface ContactItemState {
-  id: number;
-  name: string | undefined;
-  phoneNumber: string | undefined;
-  eMail: string | undefined;
-  memo?: string | undefined;
-  createdTime: number;
-}
+// interface ContactItemState {
+//   id: number;
+//   name: string | undefined;
+//   phoneNumber: string | undefined;
+//   eMail: string | undefined;
+//   memo?: string | undefined;
+//   createdTime: number;
+// }
 
 const getTimeString = (unixtime: number) => {
   const dateTime = new Date(unixtime);
@@ -26,33 +27,37 @@ const getTimeString = (unixtime: number) => {
 
 const Contact = () => {
   // const { id } = useParams<{ id: string }>();
-  const [contactList, setContactList] = useState<ContactItemState[]>([]);
-
+  // const [contactList, setContactList] = useState<ContactItemState[]>([]);
   const contact = useSelector((state: RootState) => state.contact);
   const contactData = useSelector((state: RootState) => state.contact.data);
   const history = useHistory();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const fetchData = async () => {
-    const res = await api.fetch();
+  // const fetchData = async () => {
+  //   const res = await api.fetch();
 
-    const contacts = res.data.map((item) => ({
-      id: item.id,
-      name: item.name,
-      phoneNumber: item.phoneNumber,
-      eMail: item.eMail,
-      memo: item.memo,
-      createdTime: item.createdTime,
-    })) as ContactItemState[];
+  //   const contacts = res.data.map((item) => ({
+  //     id: item.id,
+  //     name: item.name,
+  //     phoneNumber: item.phoneNumber,
+  //     eMail: item.eMail,
+  //     memo: item.memo,
+  //     createdTime: item.createdTime,
+  //   })) as ContactItemState[];
 
-    setContactList(contacts); // todo state 업데이트
-  };
+  //   setContactList(contacts); // todo state 업데이트
+  // };
 
   useEffect(() => {
     console.log("--1. mounted--");
     // 백엔드에서 데이터를 받아올 것임
     // ES8 style로 async-await 기법을 이용해서 데이터를 조회해옴
-    fetchData();
-  }, []);
+    if (!contact.isFetched) {
+      dispatch(requestFetchContacts());
+    }
+    // fetchData();
+    console.log(contact);
+  }, [dispatch, contact.isFetched]);
 
   return (
     <>
@@ -95,7 +100,7 @@ const Contact = () => {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.phoneNumber}</td>
-                <td>{item.eMail}</td>
+                <td>{item.email}</td>
                 <td>{getTimeString(item.createdTime)}</td>
               </tr>
             </tbody>

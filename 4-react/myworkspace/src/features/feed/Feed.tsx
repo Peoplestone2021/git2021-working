@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Alert from "../../components/Alert";
+import Alert from "../../components/alert/Alert";
 import produce from "immer";
 import FeedEditModal from "./FeedEditModal";
 import { FeedState } from "./type";

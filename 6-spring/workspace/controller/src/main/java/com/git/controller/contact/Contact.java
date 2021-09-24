@@ -13,7 +13,7 @@ public class Contact {
 	private long id;
 	private String name;
 	private String phoneNumber;
-	private String eMail;
+	private String email;
 	private String memo;
 	private long createdTime;
 }

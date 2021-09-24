@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.git.controller.lib.TextProcesser;
+
 // REST API
 // REST 방식으로 접근할 수 있는 인터페이스 제공하는 프로그램
 
@@ -43,19 +45,35 @@ public class ContactController {
 	// contact 1건 추가
 	// POST /contacts {"memo":"테스트입니다"}
 	@PostMapping(value = "/contacts")
-	public Contact postContact(@RequestBody Contact contact, HttpServletResponse res) {
+	public Contact postContact(@RequestBody Contact contact, HttpServletResponse res) throws InterruptedException {
 		// 데이터 검증 로직
 		// 메모값이 없으면 에러처리함
-		if(contact.getName() == null || contact.getName().isEmpty()) {
-			// 클라이언트에서 메모값이 없이 보내거나 빈값으로 보낸 것임
-			// 클라이언트 오류, 4xx
-			// 요청값을 잘못보낸 것임 - Bad Request (400)
-			// res.setStatus(400);
-			
-			// Dispatcher Servlet이 생성한 응답객체에 status코드를 넣어줌
+		
+		Thread.sleep(2000);
+		
+		if(TextProcesser.isEmpyText(contact.getName())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
+		if(TextProcesser.isEmpyText(contact.getPhoneNumber())) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		if(TextProcesser.isEmpyText(contact.getEmail())) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		
+//		if(contact.getName() == null || contact.getName().isEmpty()) {
+//			// 클라이언트에서 메모값이 없이 보내거나 빈값으로 보낸 것임
+//			// 클라이언트 오류, 4xx
+//			// 요청값을 잘못보낸 것임 - Bad Request (400)
+//			// res.setStatus(400);
+//			
+//			// Dispatcher Servlet이 생성한 응답객체에 status코드를 넣어줌
+//			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//			return null;
+//		}
 		
 		// id값을 생성
 		Long currentId = maxId.incrementAndGet();
@@ -67,7 +85,7 @@ public class ContactController {
 								.id(currentId)
 								.name(contact.getName())
 								.phoneNumber(contact.getPhoneNumber())
-								.eMail(contact.getEMail())
+								.email(contact.getEmail())
 								.memo(contact.getMemo()
 //										.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "")
 										)
@@ -105,20 +123,32 @@ public class ContactController {
 			return null;
 		}
 		
-		if(contact.getName()==null
-				||contact.getName().isEmpty()
-				||contact.getPhoneNumber()==null
-				||contact.getPhoneNumber().isEmpty()
-				||contact.getEMail()==null
-				||contact.getEMail().isEmpty()
-				) {
+		if(TextProcesser.isEmpyText(contact.getName())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
+		if(TextProcesser.isEmpyText(contact.getPhoneNumber())) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		if(TextProcesser.isEmpyText(contact.getEmail())) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+//		if(contact.getName()==null
+//				||contact.getName().isEmpty()
+//				||contact.getPhoneNumber()==null
+//				||contact.getPhoneNumber().isEmpty()
+//				||contact.getEMail()==null
+//				||contact.getEMail().isEmpty()
+//				) {
+//			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//			return null;
+//		}
 		
 		findItem.setName(contact.getName());
 		findItem.setPhoneNumber(contact.getPhoneNumber());
-		findItem.setEMail(contact.getEMail());
+		findItem.setEmail(contact.getEmail());
 		findItem.setMemo(contact.getMemo());
 		
 		return findItem;

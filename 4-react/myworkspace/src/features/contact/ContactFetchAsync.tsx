@@ -10,7 +10,7 @@ interface ContactItemState {
   id: number;
   name: string | undefined;
   phoneNumber: string | undefined;
-  eMail: string | undefined;
+  email: string | undefined;
   memo?: string | undefined;
   createdTime: number;
 }
@@ -39,7 +39,7 @@ const Contact = () => {
       id: item.id,
       name: item.name,
       phoneNumber: item.phoneNumber,
-      eMail: item.eMail,
+      email: item.email,
       memo: item.memo,
       createdTime: item.createdTime,
     })) as ContactItemState[];
@@ -95,7 +95,7 @@ const Contact = () => {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.phoneNumber}</td>
-                <td>{item.eMail}</td>
+                <td>{item.email}</td>
                 <td>{getTimeString(item.createdTime)}</td>
               </tr>
             </tbody>

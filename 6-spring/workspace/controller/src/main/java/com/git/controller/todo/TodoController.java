@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 // REST API
 // REST 방식으로 접근할 수 있는 인터페이스 제공하는 프로그램
 
@@ -48,6 +50,8 @@ public class TodoController {
 		System.out.println(todo);
 		// 데이터 검증 로직
 		// 메모값이 없으면 에러처리함
+		
+		
 		if(todo.getMemo() == null || todo.getMemo().isEmpty()) {
 			// 클라이언트에서 메모값이 없이 보내거나 빈값으로 보낸 것임
 			// 클라이언트 오류, 4xx
