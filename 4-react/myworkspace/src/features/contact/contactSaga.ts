@@ -4,11 +4,17 @@ import contactReducer, {
   modifyContact,
   initialContact,
   initialCompleted,
+  initialPagedContact,
+  ContactPage,
 } from "./contactSlice";
 import { createAction, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { ContactItem } from "./contactSlice";
 import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
-import api, { ContactItemRequest, ContactItemResponse } from "./contactApi";
+import api, {
+  ContactItemRequest,
+  ContactItemResponse,
+  ContactPagingResponse,
+} from "./contactApi";
 import { AxiosResponse } from "axios";
 import {
   endProgress,
@@ -16,12 +22,21 @@ import {
 } from "../../components/progress/progressSlice";
 import { addAlert } from "../../components/alert/alertSlice";
 
+export interface PageRequest {
+  page: number;
+  size: number;
+}
+
 export const requestAddContact = createAction<ContactItem>(
   `${contactReducer.name}/requestAddContact`
 );
 
 export const requestFetchContacts = createAction(
   `${contactReducer.name}/requestFetchContacts`
+);
+
+export const requestFetchPagingContacts = createAction<PageRequest>(
+  `${contactReducer.name}/requestFetchPagingContacts`
 );
 
 export const requestRemoveContact = createAction<number>(
@@ -102,6 +117,51 @@ function* fetchData() {
   yield put(initialContact(contacts));
 }
 
+function* fetchPagingData(action: PayloadAction<PageRequest>) {
+  yield console.log("--fetchPagingData--");
+
+  const page = action.payload.page;
+  const size = action.payload.size;
+
+  // spinner 보여주기
+  yield put(startProgress());
+
+  // 백엔드에서 데이터 받아오기
+  const result: AxiosResponse<ContactPagingResponse> = yield call(
+    api.fetchPaging,
+    page,
+    size
+  );
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
+
+  // 받아온 페이지 데이터를 Payload 변수로 변환
+  const photoPage: ContactPage = {
+    // 응답데이터배열을 액션페이로드배열로 변환
+    // PhotoItemReponse[] => PhotoItem[]
+    data: result.data.content.map(
+      (item) =>
+        ({
+          id: item.id,
+          name: item.name,
+          phoneNumber: item.phoneNumber,
+          email: item.email,
+          memo: item.memo,
+          createdTime: item.createdTime,
+        } as ContactItem)
+    ),
+    totalElements: result.data.totalElements,
+    totalPages: result.data.totalPages,
+    page: result.data.number,
+    pageSize: result.data.size,
+    isLast: result.data.last,
+  };
+
+  // state 초기화 reducer 실행
+  yield put(initialPagedContact(photoPage));
+}
+
 function* removeData(action: PayloadAction<number>) {
   yield console.log("--removeData--");
 
@@ -161,6 +221,7 @@ export default function* contactSaga() {
   yield takeEvery(requestAddContact, addData);
 
   yield takeLatest(requestFetchContacts, fetchData);
+  yield takeLatest(requestFetchPagingContacts, fetchPagingData);
 
   yield takeEvery(requestRemoveContact, removeData);
 

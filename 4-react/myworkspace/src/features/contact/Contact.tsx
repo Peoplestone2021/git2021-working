@@ -1,9 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 import { AppDispatch, RootState } from "../../store";
-import { requestFetchContacts } from "./contactSaga";
-// import { useParams } from "react-router-dom";
+import {
+  requestFetchContacts,
+  requestFetchPagingContacts,
+} from "./contactSaga";
+// import { useParams } from ",react-router-dom";
 // import { addContact, ContactItem } from "./contactSlice";
 // import api from "./contactApi";
 
@@ -54,16 +58,57 @@ const Contact = () => {
     // ES8 style로 async-await 기법을 이용해서 데이터를 조회해옴
     if (!contact.isFetched) {
       dispatch(requestFetchContacts());
+      dispatch(
+        requestFetchPagingContacts({
+          page: 0,
+          size: contact.pageSize,
+        })
+      );
     }
     // fetchData();
     console.log(contact);
-  }, [dispatch, contact.isFetched]);
+  }, [dispatch, contact.isFetched, contact.pageSize]);
+
+  const handlePageChanged = (page: number) => {
+    console.log("--page: " + page);
+    // setCurrentPage(page);
+    dispatch(
+      requestFetchPagingContacts({
+        page,
+        size: contact.pageSize,
+      })
+    );
+  };
+
+  const handlePageSizeChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.currentTarget.value);
+    dispatch(
+      requestFetchPagingContacts({
+        page: contact.page,
+        size: +e.currentTarget.value,
+      })
+    );
+  };
 
   return (
     <>
       <div style={{ width: "40vw" }} className="mx-auto">
         <h2 className="text-center my-5">연락처 관리</h2>
+        {/* 버튼 */}
         <div className="d-md-flex justify-content-md-end">
+          <select
+            className="form-select form-select-sm me-2"
+            style={{ width: "60px" }}
+            onChange={(e) => {
+              handlePageSizeChanged(e);
+            }}
+          >
+            {[5, 10, 15].map((size) => (
+              <option value={size} selected={contact.pageSize === size}>
+                {size}
+              </option>
+            ))}
+          </select>
           <button
             id="btn-add"
             type="button"
@@ -115,6 +160,15 @@ const Contact = () => {
             </tfoot>
           )}
         </table>
+        {/* 페이지네이션 */}
+        <div className="d-flex justify-content-center mt-4">
+          <Pagination
+            blockSize={2} // 고정값
+            totalPages={contact.totalPages}
+            currentPage={contact.page}
+            onPageChanged={handlePageChanged}
+          />
+        </div>
       </div>
     </>
   );

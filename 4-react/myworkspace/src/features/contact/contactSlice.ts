@@ -9,12 +9,26 @@ export interface ContactItem {
   createdTime: number;
 }
 
+export interface ContactPage {
+  data: ContactItem[];
+  totalElements: number;
+  totalPages: number;
+  page: number;
+  pageSize: number;
+  isLast: boolean;
+}
+
 interface ContactState {
   data: ContactItem[];
   isFetched: boolean;
   isAddCompleted?: boolean;
   isRemoveCompleted?: boolean;
   isModifyCompleted?: boolean;
+  totalElements?: number;
+  totalPages: number;
+  page: number;
+  pageSize: number;
+  isLast?: boolean;
 }
 
 const initialState: ContactState = {
@@ -45,6 +59,9 @@ const initialState: ContactState = {
     // },
   ],
   isFetched: false,
+  page: 0,
+  pageSize: 10,
+  totalPages: 0,
 };
 
 const contactSlice = createSlice({
@@ -59,6 +76,8 @@ const contactSlice = createSlice({
     },
     initialCompleted: (state) => {
       delete state.isAddCompleted;
+      delete state.isRemoveCompleted;
+      delete state.isModifyCompleted;
     },
     removeContact: (state, action: PayloadAction<number>) => {
       const id = action.payload;
@@ -86,6 +105,19 @@ const contactSlice = createSlice({
       // 데이터를 받아옴으로 값을 남김
       state.isFetched = true;
     },
+    initialPagedContact: (state, action: PayloadAction<ContactPage>) => {
+      // 백엔드에서 받아온 데이터
+      // 컨텐트
+      state.data = action.payload.data;
+      // 페이징 데이터
+      state.totalElements = action.payload.totalElements;
+      state.totalPages = action.payload.totalPages;
+      state.page = action.payload.page;
+      state.pageSize = action.payload.pageSize;
+      state.isLast = action.payload.isLast;
+      // 데이터를 받아옴으로 값을 남김
+      state.isFetched = true;
+    },
   },
 });
 
@@ -95,6 +127,7 @@ export const {
   modifyContact,
   initialContact,
   initialCompleted,
+  initialPagedContact,
 } = contactSlice.actions;
 
 export default contactSlice.reducer;
