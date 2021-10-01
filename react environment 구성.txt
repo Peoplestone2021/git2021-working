@@ -1,0 +1,29 @@
+-- 개발환경 준비
+node.js 설치
+https://nodejs.org/ko/
+
+typescript 개발환경 설치
+npm install -g typescript
+npm install -g ts-node
+npm install -g @types/node
+
+code runner extension 설치
+
+create-react-app typescript 템플릿으로 앱 생성
+https://create-react-app.dev/docs/adding-typescript/
+
+npx create-react-app myworkspace --template typescript
+cd myworkspace
+npm start
+
+-- Bootstrap 사용
+설치
+npm install bootstrap @popperjs/core
+npm install node-sass
+
+npm install react-router-dom
+npm install @types/react-router-dom
+
+-- Redux 환경구성 및 초기 셋업 ---------------------------------
+redux 및 redux-tookit 라이브러리 설치
+npm install @reduxjs/toolkit react-redux

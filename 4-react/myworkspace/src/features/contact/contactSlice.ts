@@ -31,6 +31,8 @@ interface ContactState {
   isLast?: boolean;
 }
 
+const contactPageSize = localStorage.getItem("contact_page_size");
+
 const initialState: ContactState = {
   data: [
     // {
@@ -60,7 +62,7 @@ const initialState: ContactState = {
   ],
   isFetched: false,
   page: 0,
-  pageSize: 10,
+  pageSize: contactPageSize ? +contactPageSize : 2,
   totalPages: 0,
 };
 

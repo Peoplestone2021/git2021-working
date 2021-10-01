@@ -1,0 +1,65 @@
+==		12:40
+nohup java -jar myworkspace-0.0.1-SNAPSHOT.jar &
+
+	-> nohup: no hang-up (접속을 끊어도 작동되게 함, 전화기)
+	-> &: background 실행 (쉘창 뒤에서 실행)
+	
+ps -ef | grep java
+
+	-> ps(process): 
+	-> -ef: 시스템에서 실행 중인 모든 프로세스(-e)를 자세하게(-f) 조회
+	-- ps -ef: 전체 프로세스 목록 자세히 조회
+	-- grep 키워드 파일명: 파일의 특정키워드 검색 
+	
+	-> | (pipe, 연결자): 앞 명령의 출력을 뒤 명령어의 입력으로 연결
+	
+	-> grep java 전체 프로세스 목록 
+	
+	** ps -ef의 처리결과가 화면에 출력되지 않고 
+	
+tail 파일명: 파일의 뒤쪽 부분을 읽어옴(기본적으로 10줄) 
+	
+tail -f 파일명
+	: 파일 뒤쪽을 읽고, 추가되는 것을 대기하고 있음
+	: 내용이 추가되면 바로 출력함
+	
+tail -f nohup.out
+	: nohup 
+	
+kill -9 PID
+	: 프로세스 강제 종료
+	
+	nohup java -jar home/ubuntu/myworkspace-0.0.1-SNAPSHOT.jar > myworkspace.log &
+	
+명령어 > 파일명 
+	명령어의 실행출력 결과가 해당 파일에 기록됨(덮어쓰기)
+
+명령어 >> 파일명
+	명령어의 실행출력 결과가 해당 파일에 기록됨(뒤에 붙임)
+
+==		15:00
+drwxrwxr-x
+
+	d		rwx		rwx		r-x
+	filetype	owner	ownergroup	other
+	디렉터리	소유자권한		소유자그룹권한	그외사용자권한
+			(삭제,수정)
+			
+421		421		4		1
+rwx 	rwx 	r-x 
+
+775
+
+sudo chmod 777
+
+==		15:51 
+
+gradle 멍 
+
+http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?itemCode=PM10&dataGubun=HOUR&pageNo=1&serviceKey=86nk%2BhuE1Dlj1MpCqXND3DK9g8JXv%2FmYKUfrGrjBl51b0%2BQ%2FloCFpC0629bkhVaI5U1Ddjpkr4HwTQyix7EM3w%3D%3D
+
+http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?pageNo=1&numOfRows=10&serviceKey=86nk%2BhuE1Dlj1MpCqXND3DK9g8JXv%2FmYKUfrGrjBl51b0%2BQ%2FloCFpC0629bkhVaI5U1Ddjpkr4HwTQyix7EM3w%3D%3D
+
+scp -i "c:\keyfile\myworkspace.pem" -r ./build/* ubuntu@ec2-52-78-190-195.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/web/myworkspace
+
+ssh -i "c:\keyfile\myworkspace.pem" ubuntu@ec2-52-78-190-195.ap-northeast-2.compute.amazonaws.com "sudo rm -rf /home/ubuntu/web/myworkspace/*"
