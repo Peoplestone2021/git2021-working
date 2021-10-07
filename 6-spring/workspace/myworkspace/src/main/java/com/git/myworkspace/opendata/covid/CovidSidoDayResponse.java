@@ -34,20 +34,20 @@ public class CovidSidoDayResponse {
 	public class Item {
 		private String stdDay;
 		private String gubun;
-		
-		// È®ÁøÀÚ
+
+//		í™•ì§„ì ìˆ˜
 		private String defCnt;
-		// ÇØ¿Ü À¯ÀÔ È®ÁøÀÚ 
+		// í•´ì™¸ ìœ ì… í™•ì§„ì 
 		private String overFlowCnt;
-		// ±¹³» ¹ß»ı È®ÁøÀÚ
+		// êµ­ë‚´ ë°œìƒ í™•ì§„ì
 		private String localOccCnt;
-		// °İ¸®ÁßÀÎ È®ÁøÀÚ
+		// ê²©ë¦¬ì¤‘ì¸ í™•ì§„ì
 		private String isolIngCnt;
-		// °İ¸® ÇØÁ¦ È®ÁøÀÚ 
+		// ê²©ë¦¬ í•´ì œ í™•ì§„ì 
 		private String isolClearCnt;
-		// »ç¸ÁÀÚ ¼ö
+		// ì‚¬ë§ì ìˆ˜
 		private String deathCnt;
-		// ÀüÀÏ´ëºñ Áõ°¨ ¼ö
+		// ì „ì¼ëŒ€ë¹„ ì¦ê° ìˆ˜
 		private String incDec;
 		
 	}

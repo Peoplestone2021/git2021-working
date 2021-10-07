@@ -24,18 +24,19 @@ public class CovidSidoDay {
 	@Id
 	private String gubun;
 	
+	// í™•ì§„ì ìˆ˜
 	private String defCnt;
-	// ÇØ¿Ü À¯ÀÔ È®ÁøÀÚ 
-	private String overFlowCnt;
-	// ±¹³» ¹ß»ı È®ÁøÀÚ
-	private String localOccCnt;
-	// °İ¸®ÁßÀÎ È®ÁøÀÚ
-	private String isolIngCnt;
-	// °İ¸® ÇØÁ¦ È®ÁøÀÚ 
-	private String isolClearCnt;
-	// »ç¸ÁÀÚ ¼ö
-	private String deathCnt;
-	// ÀüÀÏ´ëºñ Áõ°¨ ¼ö
-	private String incDec;
+	// í•´ì™¸ ìœ ì… í™•ì§„ì 
+	private Integer overFlowCnt;
+	// êµ­ë‚´ ë°œìƒ í™•ì§„ì
+	private Integer localOccCnt;
+	// ê²©ë¦¬ì¤‘ì¸ í™•ì§„ì
+	private Integer isolIngCnt;
+	// ê²©ë¦¬ í•´ì œ í™•ì§„ì 
+	private Integer isolClearCnt;
+	// ì‚¬ë§ì ìˆ˜
+	private Integer deathCnt;
+	// ì „ì¼ëŒ€ë¹„ ì¦ê° ìˆ˜
+	private Integer incDec;
 
 }

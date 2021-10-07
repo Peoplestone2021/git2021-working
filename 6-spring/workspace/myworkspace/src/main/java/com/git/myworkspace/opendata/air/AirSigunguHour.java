@@ -1,5 +1,6 @@
 package com.git.myworkspace.opendata.air;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -20,15 +21,17 @@ import lombok.NoArgsConstructor;
 @IdClass(AirSigunguHourId.class)
 public class AirSigunguHour {
 
-	// ½Ã°£, ½Ãµµ, ½Ã±º±¸¿¡ À¯ÀÏÇÑ µ¥ÀÌÅÍ¸¸ Á¸ÀçÇØ¾ßÇÔ
-	// ¿¹) 20210930 16:00, ¼­¿ï, °­³²±¸ ÃøÁ¤µÈ µ¥ÀÌÅÍ´Â À¯ÀÏÇÏ°Ô 1°Ç Á¸ÀçÇØ¾ßÇÔ
+	// ì‹œê°„, ì‹œë„, ì‹œêµ°êµ¬ì— ìœ ì¼í•œ ë°ì´í„°ë§Œ ì¡´ì¬í•´ì•¼í•¨
+	// ì˜ˆ) 20210930 16:00, ì„œìš¸, ê°•ë‚¨êµ¬ ì¸¡ì •ëœ ë°ì´í„°ëŠ” ìœ ì¼í•˜ê²Œ 1ê±´ ì¡´ì¬í•´ì•¼í•¨
 	@Id
 	private String dataTime;
 	@Id
-	private String sidoName; // ¹Ğµµ°¡ Ä¿ºÃÀÚ 5%, ºĞÆ÷µµ°¡ Ä¿ºÃÀÚ 20, ÀÎµ¦½º Á¦¿Ü
+	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
+	private String sidoName; // ë°€ë„ê°€ ì»¤ë´¤ì 5%, ë¶„í¬ë„ê°€ ì»¤ë´¤ì 20, ì¸ë±ìŠ¤ ì œì™¸
 	@Id
+	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
 	private String cityName;
-	// °ª
-	private String pm10Value;
-	private String pm25Value;
+	// ê°’
+	private Integer pm10Value;
+	private Integer pm25Value;
 }

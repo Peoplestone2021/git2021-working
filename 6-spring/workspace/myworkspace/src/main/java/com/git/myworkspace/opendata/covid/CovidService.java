@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import com.google.gson.Gson;
 @Service
 public class CovidService {
 	
-	private final String SERVICE_KEY="86nk%2BhuE1Dlj1MpCqXND3DK9g8JXv%2FmYKUfrGrjBl51b0%2BQ%2FloCFpC0629bkhVaI5U1Ddjpkr4HwTQyix7EM3w%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20200410&endCreateDt=20200410";
+	private final String SERVICE_KEY="86nk%2BhuE1Dlj1MpCqXND3DK9g8JXv%2FmYKUfrGrjBl51b0%2BQ%2FloCFpC0629bkhVaI5U1Ddjpkr4HwTQyix7EM3w%3D%3D";
 	
 	private CovidSidoRepository repo;
 	
@@ -26,16 +27,19 @@ public class CovidService {
 		this.repo = repo;
 	}
 	
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+	@Scheduled(cron = "0 0 11 * * *")
+//	@Scheduled(cron = "0 * * * * *")
+	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovid() throws IOException {
-		String[] days = { "2021³â 10¿ù 01ÀÏ 00½Ã" };
-		for (String day : days) {
-			requestCovidSidoDay(day);
+		String[] gubuns = { "ì„œìš¸" };
+		for (String gubun : gubuns) {
+			requestCovidSidoDay(gubun);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	public void requestCovidSidoDay(String term) throws IOException{
+	public void requestCovidSidoDay(String gubun) throws IOException{
 		System.out.println(new Date().toLocaleString());
 		
 		StringBuilder builder = new StringBuilder();
@@ -45,10 +49,11 @@ public class CovidService {
 		builder.append("/Covid19");
 		builder.append("/getCovid19SidoInfStateJson");
 		builder.append("?pageNo=1&numOfRows=100");
-//		builder.append("&startCreateDt=20200410");
-//		builder.append("&endCreateDt=20200410");
+//		builder.append("?pageNo=1&numOfRows=100");
+//		builder.append("&startCreateDt=20210101");
+//		builder.append("&endCreateDt="+ gubun);
+//		builder.append("&endCreateDt=20211006");
 		builder.append("&serviceKey=" + SERVICE_KEY);
-		builder.append("&pageNo=1&numOfRows=10");
 
 		
 //		http://openapi.data.go.kr/openapi
@@ -94,12 +99,20 @@ public class CovidService {
 					.stdDay(item.getStdDay())
 					.gubun(item.getGubun())
 					.defCnt(item.getDefCnt())
-					.overFlowCnt(item.getOverFlowCnt())
-					.localOccCnt(item.getLocalOccCnt())
-					.isolIngCnt(item.getIsolIngCnt())
-					.isolClearCnt(item.getIsolClearCnt())
-					.deathCnt(item.getDeathCnt())
-					.incDec(item.getIncDec())
+					.overFlowCnt(item.getOverFlowCnt()
+							.isEmpty() ? null : Integer
+							.valueOf(item.getOverFlowCnt()))
+					.localOccCnt(item.getLocalOccCnt()
+							.isEmpty() ? null : Integer
+									.valueOf(item.getOverFlowCnt()))
+					.isolIngCnt(item.getIsolIngCnt()
+							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+					.isolClearCnt(item.getIsolClearCnt()
+							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+					.deathCnt(item.getDeathCnt()
+							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+					.incDec(item.getIncDec()
+							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
 					.build();
 			
 			list.add(record);
