@@ -1,6 +1,6 @@
 package com.git.controller;
 
-// °ªÀÌ °°ÀºÁö¸¦ ºñ±³ÇÏ´Â static ¸Ş¼­µå
+// ê°’ì´ ê°™ì€ì§€ë¥¼ ë¹„êµí•˜ëŠ” static ë©”ì„œë“œ
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -16,49 +16,49 @@ import com.git.controller.todo.Todo;
 import com.git.controller.todo.TodoController;
 
 //unit test
-//- ÀÚ¹Ù °üÁ¡À¸·Î ºÃÀ» ¶§ Å¬·¡½ºÀÇ ¸Ş¼­µåµéÀ» Å×½ºÆ®ÇÏ´Â °Í
+//- ìë°” ê´€ì ìœ¼ë¡œ ë´¤ì„ ë•Œ í´ë˜ìŠ¤ì˜ ë©”ì„œë“œë“¤ì„ í…ŒìŠ¤íŠ¸í•˜ëŠ” ê²ƒ
 //
 //integration test
-//- ¹é¿£µå°üÁ¡À¸·Î ºÃÀ» ¶§´Â API¸¦ Å×½ºÆ®ÇÏ´Â °Í
-//- ¼­¹ö¸¦ ¶ç¿ì°í, ³×Æ®¿öÅ©·Î µ¥ÀÌÅÍ¸¦ º¸³»°í Ã³¸® °á°ú±îÁö È®ÀÎ
+//- ë°±ì—”ë“œê´€ì ìœ¼ë¡œ ë´¤ì„ ë•ŒëŠ” APIë¥¼ í…ŒìŠ¤íŠ¸í•˜ëŠ” ê²ƒ
+//- ì„œë²„ë¥¼ ë„ìš°ê³ , ë„¤íŠ¸ì›Œí¬ë¡œ ë°ì´í„°ë¥¼ ë³´ë‚´ê³  ì²˜ë¦¬ ê²°ê³¼ê¹Œì§€ í™•ì¸
 
 @SpringBootTest
 public class TestTodoController {
 		
-	// test case: ÇÒ ÀÏ Ãß°¡
-	// event flow(Ã³¸®Èå¸§): ÇÒ ÀÏ 1°ÇÀ» Ãß°¡ÇÔ
-	// pre-condition(»çÀüÁ¶°Ç): µû·Î ¾øÀ½..
-	// expected result(¿¹»ó°á°ú): ÇÒ ÀÏ ¸ñ·Ï¿¡ Ãß°¡ÇÑ µ¥ÀÌÅÍ°¡ Á¸ÀçÇØ¾ßÇÔ
+	// test case: í•  ì¼ ì¶”ê°€
+	// event flow(ì²˜ë¦¬íë¦„): í•  ì¼ 1ê±´ì„ ì¶”ê°€í•¨
+	// pre-condition(ì‚¬ì „ì¡°ê±´): ë”°ë¡œ ì—†ìŒ..
+	// expected result(ì˜ˆìƒê²°ê³¼): í•  ì¼ ëª©ë¡ì— ì¶”ê°€í•œ ë°ì´í„°ê°€ ì¡´ì¬í•´ì•¼í•¨
 	@Test
 	void addTodo() {
-		// given - Å×½ºÆ® µ¥ÀÌÅÍ ¹× °´Ã¼ ÁØºñ
+		// given - í…ŒìŠ¤íŠ¸ ë°ì´í„° ë° ê°ì²´ ì¤€ë¹„
 		TodoController controller = new TodoController();
 		Todo expected = Todo.builder().memo("test").build();
 		
-		// when - Å×½ºÆ® ÄÉÀÌ½ºÀÇ event flow¸¦ ¼öÇà
-		// ServletResponse °´Ã¼´Â °¡Â¥(Mock)À» ³Ö¾îÁÜ
+		// when - í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ì˜ event flowë¥¼ ìˆ˜í–‰
+		// ServletResponse ê°ì²´ëŠ” ê°€ì§œ(Mock)ì„ ë„£ì–´ì¤Œ
 		controller.addTodo(expected, new MockHttpServletResponse());
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
 		
-		// ÀüÃ¼ ¸ñ·Ï¿¡ Ãß°¡ÇÑ¾Ö¸¦ °¡Á®¿È
+		// ì „ì²´ ëª©ë¡ì— ì¶”ê°€í•œì• ë¥¼ ê°€ì ¸ì˜´
 		List<Todo> todos =  controller.getTodos();
-		Todo actual = todos.get(0);	// arrayList.get(ÀÎµ¦½º);
+		Todo actual = todos.get(0);	// arrayList.get(ì¸ë±ìŠ¤);
 		
-		// ¿¹»ó°á°ú µ¥ÀÌÅÍ¿Í ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ ºñ±³ÇÔ
+		// ì˜ˆìƒê²°ê³¼ ë°ì´í„°ì™€ ì‹¤ì œ ë°ì´í„°ë¥¼ ë¹„êµí•¨
 		assertEquals(1, actual.getId());
 		assertEquals(expected.getMemo(), actual.getMemo());
 	}
 	
-	// test case: ÇÒ ÀÏ »èÁ¦
-	// event flow(Ã³¸®Èå¸§): ÇÒ ÀÏ 1°ÇÀ» »èÁ¦ÇÔ
-	// pre-condition(»çÀüÁ¶°Ç): ÇÒ ÀÏ µ¥ÀÌÅÍ ÃÖ¼Ò 1°Ç ÀÌ»ó ÀÖ¾î¾ßÇÔ
-	// expected result(¿¹»ó°á°ú): ÇÒ ÀÏ ¸ñ·Ï¿¡ »èÁ¦ÇÑ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ¸é ¾È µÊ	
+	// test case: í•  ì¼ ì‚­ì œ
+	// event flow(ì²˜ë¦¬íë¦„): í•  ì¼ 1ê±´ì„ ì‚­ì œí•¨
+	// pre-condition(ì‚¬ì „ì¡°ê±´): í•  ì¼ ë°ì´í„° ìµœì†Œ 1ê±´ ì´ìƒ ìˆì–´ì•¼í•¨
+	// expected result(ì˜ˆìƒê²°ê³¼): í•  ì¼ ëª©ë¡ì— ì‚­ì œí•œ ë°ì´í„°ê°€ ì¡´ì¬í•˜ë©´ ì•ˆ ë¨	
 	@Test
 	void removeTodo() {
-		// given - Å×½ºÆ® µ¥ÀÌÅÍ ¹× °´Ã¼ ÁØºñ
-		// »çÀüÁ¶°ÇÀÌ ÀÖ´Ù¸é »çÀüÁ¶°ÇÀ» ÁØºñÇÏ´Â ´Ü°è
-		// ¿©±â¼­´Â 1°Ç Ãß°¡°¡ µÇ¾îÀÖ¾î¾ßÇÔ
+		// given - í…ŒìŠ¤íŠ¸ ë°ì´í„° ë° ê°ì²´ ì¤€ë¹„
+		// ì‚¬ì „ì¡°ê±´ì´ ìˆë‹¤ë©´ ì‚¬ì „ì¡°ê±´ì„ ì¤€ë¹„í•˜ëŠ” ë‹¨ê³„
+		// ì—¬ê¸°ì„œëŠ” 1ê±´ ì¶”ê°€ê°€ ë˜ì–´ìˆì–´ì•¼í•¨
 		TodoController controller = new TodoController();
 		
 		Todo testItem = Todo.builder().memo("test").build();
@@ -66,77 +66,77 @@ public class TestTodoController {
 		controller.addTodo(testItem, new MockHttpServletResponse());
 		
 		List<Todo> beforeTodos = controller.getTodos();
-		assertEquals(1, beforeTodos.size());	// »èÁ¦ Àü¿¡´Â ¸ñ·Ï Å©±â°¡ 1
+		assertEquals(1, beforeTodos.size());	// ì‚­ì œ ì „ì—ëŠ” ëª©ë¡ í¬ê¸°ê°€ 1
 		
-		// when - Å×½ºÆ® ÄÉÀÌ½ºÀÇ event flow¸¦ ¼öÇà
-		// id°¡ 1ÀÎ todo 1°ÇÀ» »èÁ¦
+		// when - í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ì˜ event flowë¥¼ ìˆ˜í–‰
+		// idê°€ 1ì¸ todo 1ê±´ì„ ì‚­ì œ
 		controller.removeTodo(1, new MockHttpServletResponse());	
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
-		// ¸ñ·ÏÀ» Á¶È¸ÇßÀ» ¶§ ¸ñ·ÏÀÇ Å©±â°¡ 0ÀÌ¿©ÇÔ
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
+		// ëª©ë¡ì„ ì¡°íšŒí–ˆì„ ë•Œ ëª©ë¡ì˜ í¬ê¸°ê°€ 0ì´ì—¬í•¨
 		List<Todo> afterTodos = controller.getTodos();
-		assertEquals(0, afterTodos.size());		// »èÁ¦ ÈÄ¿¡´Â ¸ñ·Ï Å©±â°¡ 0
+		assertEquals(0, afterTodos.size());		// ì‚­ì œ í›„ì—ëŠ” ëª©ë¡ í¬ê¸°ê°€ 0
 	}
 
-	// test case: ÇÒ ÀÏ ¼öÁ¤
-	// event flow(Ã³¸®Èå¸§): 
-	//   basic flow(Á¤»óÈå¸§):
-	//     1. ÇÒ ÀÏ 1°Ç¿¡ ´ëÇØ¼­ ¸Ş¸ğ°ªÀ» ¼öÁ¤ÇÔ
-	//   alternative flow(¿¹¿ÜÈå¸§): 
-	//     1. ¸ñ·Ï¿¡ ¾ø´Â id°ªÀ¸·Î »èÁ¦¸¦ ½ÇÇà - 404
-	//	   2. ¸Ş¸ğ°ªÀ» ºó °ª ¶Ç´Â µ¥ÀÌÅÍ °´Ã¼¸¦ ¾Èº¸³ÂÀ½ - 400 
-	// pre-condition(»çÀüÁ¶°Ç): ÇÒ ÀÏ µ¥ÀÌÅÍ ÃÖ¼Ò 1°Ç ÀÌ»ó ÀÖ¾î¾ßÇÔ
-	// expected result(¿¹»ó°á°ú): ÇÒ ÀÏ ¸ñ·Ï¿¡ ¼öÁ¤ÇÑ ¸Ş¸ğ°ªÀ¸·Î Ãâ·ÂµÇ¾î¾ßÇÔ		
+	// test case: í•  ì¼ ìˆ˜ì •
+	// event flow(ì²˜ë¦¬íë¦„): 
+	//   basic flow(ì •ìƒíë¦„):
+	//     1. í•  ì¼ 1ê±´ì— ëŒ€í•´ì„œ ë©”ëª¨ê°’ì„ ìˆ˜ì •í•¨
+	//   alternative flow(ì˜ˆì™¸íë¦„): 
+	//     1. ëª©ë¡ì— ì—†ëŠ” idê°’ìœ¼ë¡œ ì‚­ì œë¥¼ ì‹¤í–‰ - 404
+	//	   2. ë©”ëª¨ê°’ì„ ë¹ˆ ê°’ ë˜ëŠ” ë°ì´í„° ê°ì²´ë¥¼ ì•ˆë³´ëƒˆìŒ - 400 
+	// pre-condition(ì‚¬ì „ì¡°ê±´): í•  ì¼ ë°ì´í„° ìµœì†Œ 1ê±´ ì´ìƒ ìˆì–´ì•¼í•¨
+	// expected result(ì˜ˆìƒê²°ê³¼): í•  ì¼ ëª©ë¡ì— ìˆ˜ì •í•œ ë©”ëª¨ê°’ìœ¼ë¡œ ì¶œë ¥ë˜ì–´ì•¼í•¨		
 	@Test
 	void modifyTodo() {
-		// given - Å×½ºÆ® µ¥ÀÌÅÍ ¹× °´Ã¼ ÁØºñ
-		// »çÀüÁ¶°ÇÀÌ ÀÖ´Ù¸é »çÀüÁ¶°ÇÀ» ÁØºñÇÏ´Â ´Ü°è
-		// ¿©±â¼­´Â 1°Ç Ãß°¡°¡ µÇ¾îÀÖ¾î¾ßÇÔ		
+		// given - í…ŒìŠ¤íŠ¸ ë°ì´í„° ë° ê°ì²´ ì¤€ë¹„
+		// ì‚¬ì „ì¡°ê±´ì´ ìˆë‹¤ë©´ ì‚¬ì „ì¡°ê±´ì„ ì¤€ë¹„í•˜ëŠ” ë‹¨ê³„
+		// ì—¬ê¸°ì„œëŠ” 1ê±´ ì¶”ê°€ê°€ ë˜ì–´ìˆì–´ì•¼í•¨		
 		TodoController controller = new TodoController();
 		
 		Todo testItem = Todo.builder().memo("test").build();
 		controller.addTodo(testItem, new MockHttpServletResponse());		
 		
-		// º¯°æÇÒ Å×½ºÆ® µ¥ÀÌÅÍ
+		// ë³€ê²½í•  í…ŒìŠ¤íŠ¸ ë°ì´í„°
 		String expectedResult = "modify test memo";
 		Todo modifyData = Todo.builder().memo(expectedResult).build();
 		
 		HttpServletResponse res = new MockHttpServletResponse();
 		
-		// basic flow - Á¤»óÀûÀÎ »óÈ²
-		// when - Å×½ºÆ® ÄÉÀÌ½ºÀÇ event flow¸¦ ¼öÇà
-		// id°¡ 1ÀÎ todo¿¡ memo¸¦ ¼öÁ¤
+		// basic flow - ì •ìƒì ì¸ ìƒí™©
+		// when - í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ì˜ event flowë¥¼ ìˆ˜í–‰
+		// idê°€ 1ì¸ todoì— memoë¥¼ ìˆ˜ì •
 		controller.modifyTodo(1, modifyData, res);
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
-		// ¸ñ·ÏÀ» Á¶È¸ÇßÀ» ¶§ ÇØ´ç ¾ÆÀÌÅÛÀÇ ¸Ş¸ğ°ªÀÌ ¿¹»ó°á°ú¿Í ÀÏÄ¡ÇØ¾ßÇÔ
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
+		// ëª©ë¡ì„ ì¡°íšŒí–ˆì„ ë•Œ í•´ë‹¹ ì•„ì´í…œì˜ ë©”ëª¨ê°’ì´ ì˜ˆìƒê²°ê³¼ì™€ ì¼ì¹˜í•´ì•¼í•¨
 		List<Todo> todos = controller.getTodos();
 		assertEquals(expectedResult, todos.get(0).getMemo());	
 		
-		// altanative flow - 1. id°ªÀÌ ¾ø´Â °æ¿ì
-		// when - id°¡ 2·Î ¼öÁ¤ÇØº½
+		// altanative flow - 1. idê°’ì´ ì—†ëŠ” ê²½ìš°
+		// when - idê°€ 2ë¡œ ìˆ˜ì •í•´ë´„
 		Todo resultTodoId = controller.modifyTodo(2, modifyData, res);
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
-		// ¹İÈ¯ °´Ã¼°¡ null, Status Code 404
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
+		// ë°˜í™˜ ê°ì²´ê°€ null, Status Code 404
 		assertNull(resultTodoId); 
 		assertEquals(HttpServletResponse.SC_NOT_FOUND, res.getStatus());
 		
-		// altanative flow - 2-1. memo°ªÀÌ nullÀÎ°æ¿ì
+		// altanative flow - 2-1. memoê°’ì´ nullì¸ê²½ìš°
 		// when
 		Todo resultTodoMemoNull = controller.modifyTodo(1, new Todo(), res);
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
-		// ¹İÈ¯ °´Ã¼°¡ null, Status Code 400
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
+		// ë°˜í™˜ ê°ì²´ê°€ null, Status Code 400
 		assertNull(resultTodoMemoNull); 
 		assertEquals(HttpServletResponse.SC_BAD_REQUEST, res.getStatus());
 
-		// altanative flow - 2-2. memo°ªÀÌ ºó °ª("")ÀÎ°æ¿ì
+		// altanative flow - 2-2. memoê°’ì´ ë¹ˆ ê°’("")ì¸ê²½ìš°
 		// when
 		Todo resultTodoMemoEmpty = controller.modifyTodo(1, Todo.builder().memo("").build(), res);
 		
-		// then - ¿¹»ó°á°ú¿Í ½ÇÁ¦°á°ú¸¦ ºñ±³
-		// ¹İÈ¯ °´Ã¼°¡ null, Status Code 400		
+		// then - ì˜ˆìƒê²°ê³¼ì™€ ì‹¤ì œê²°ê³¼ë¥¼ ë¹„êµ
+		// ë°˜í™˜ ê°ì²´ê°€ null, Status Code 400		
 		assertNull(resultTodoMemoEmpty); 
 		assertEquals(HttpServletResponse.SC_BAD_REQUEST, res.getStatus());		
 	}

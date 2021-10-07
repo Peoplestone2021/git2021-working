@@ -28,7 +28,7 @@ public class CovidService {
 	}
 	
 //	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
-	@Scheduled(cron = "0 0 11 * * *")
+	@Scheduled(cron = "0 * * * * *")
 //	@Scheduled(cron = "0 * * * * *")
 	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovid() throws IOException {

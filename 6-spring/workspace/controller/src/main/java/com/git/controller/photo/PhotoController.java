@@ -22,101 +22,98 @@ import com.git.controller.lib.TextProcesser;
 
 @RestController
 public class PhotoController {
-	
-	private SortedMap<Long, Photo> photos = 
-			Collections.synchronizedSortedMap(new TreeMap<Long, Photo>(Collections.reverseOrder())) ;
+
+	private SortedMap<Long, Photo> photos = Collections
+			.synchronizedSortedMap(new TreeMap<Long, Photo>(Collections.reverseOrder()));
 	private AtomicLong maxId = new AtomicLong();
-	
+
 	@GetMapping(value = "/photos")
-	public List<Photo> getPhotos() {
+	public List<Photo> getPhotos() throws InterruptedException {
+		Thread.sleep(1000); // ì„ì‹œì ìœ¼ë¡œ 2ì´ˆ ì •ì§€
 		return new ArrayList<Photo>(photos.values());
 	}
-	
+
 	@PostMapping(value = "/photos")
 	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
-		
-		Thread.sleep(2000);	// ÀÓ½Ã
-		
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
-		if(TextProcesser.isEmpyText(photo.getTitle())) {
+		Thread.sleep(1000); // ì„ì‹œ
+
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
+		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		
-		// ÆÄÀÏURLÀÌ ºó°ª
-		if(TextProcesser.isEmpyText(photo.getPhotoUrl())) {
+
+		// íŒŒì¼URLì´ ë¹ˆê°’
+		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
-		}			
-		
-		// id°ªÀ» »ı¼º
+		}
+
+		// idê°’ì„ ìƒì„±
 		Long currentId = maxId.incrementAndGet();
-		
-		// °´Ã¼ »ı¼º
-		Photo photoItem = Photo.builder()
-									.id(currentId)
-									.title(photo.getTitle())
-									.description(TextProcesser.getPlainText(photo.getDescription()))
-									.photoUrl(photo.getPhotoUrl())
-									.fileType(photo.getFileType())
-									.fileName(photo.getFileType())
-									.createdTime(new Date().getTime())
-								.build();
-		
+
+		// ê°ì²´ ìƒì„±
+		Photo photoItem = Photo.builder().id(currentId).title(photo.getTitle())
+				.description(TextProcesser.getPlainText(photo.getDescription())).photoUrl(photo.getPhotoUrl())
+				.fileType(photo.getFileType()).fileName(photo.getFileType()).createdTime(new Date().getTime()).build();
+
 		photos.put(currentId, photoItem);
-		
-		// ¸®¼Ò½º »ı¼ºµÊ
+
+		// ë¦¬ì†ŒìŠ¤ ìƒì„±ë¨
 		res.setStatus(HttpServletResponse.SC_CREATED);
-		
-		
-		// Ãß°¡µÈ °´Ã¼¸¦ ¹İÈ¯
+
+		// ì¶”ê°€ëœ ê°ì²´ë¥¼ ë°˜í™˜
 		return photoItem;
 	}
-	
-	@DeleteMapping(value="/photos/{id}")
-	public boolean removePhotos(@PathVariable long id, HttpServletResponse res) {
-		
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
+
+	@DeleteMapping(value = "/photos/{id}")
+	public boolean removePhotos(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
+		Thread.sleep(5000);
+
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
 		Photo photo = photos.get(Long.valueOf(id));
-		if(photo == null) {
+		if (photo == null) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
-		
-		// »èÁ¦ ¼öÇà
+
+		// ì‚­ì œ ìˆ˜í–‰
 		photos.remove(Long.valueOf(id));
-		
+
 		return true;
 	}
-	
-	@PutMapping(value="/photos/{id}")	
-	public Photo modifyPhotos(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res) {
 
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
+	@PutMapping(value = "/photos/{id}")
+	public Photo modifyPhotos(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
+			throws InterruptedException {
+
+		Thread.sleep(1000);
+
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
 		Photo photoItem = photos.get(Long.valueOf(id));
-		if(photoItem == null) {
+		if (photoItem == null) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
-		
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
-		if(TextProcesser.isEmpyText(photo.getTitle())) {
+
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
+		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		
-		// ÆÄÀÏURLÀÌ ºó°ª
-		if(TextProcesser.isEmpyText(photo.getPhotoUrl())) {
+
+		// íŒŒì¼URLì´ ë¹ˆê°’
+		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		
+
 		photoItem.setTitle(photo.getTitle());
 		photoItem.setDescription(TextProcesser.getPlainText(photo.getDescription()));
 		photoItem.setPhotoUrl(photo.getPhotoUrl());
 		photoItem.setFileType(photo.getFileType());
-		photoItem.setFileName(photo.getFileType());		
-		
+		photoItem.setFileName(photo.getFileType());
+
 		return photoItem;
 	}
 }

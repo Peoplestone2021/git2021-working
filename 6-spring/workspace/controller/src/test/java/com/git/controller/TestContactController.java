@@ -13,7 +13,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.git.controller.contact.Contact;
 import com.git.controller.contact.ContactController;
-import com.git.controller.todo.Todo;
 
 @SpringBootTest
 public class TestContactController {
@@ -23,10 +22,10 @@ public class TestContactController {
 		ContactController controller=new ContactController();
 //		contactExample = 
 		Contact expected=Contact.builder()
-				.name("È«±æµ¿")
+				.name("í™ê¸¸ë™")
 				.phoneNumber("1111-1111")
-				.eMail("aaa@aaa.com")
-				.memo("¾Æ¹« ³»¿ë")
+				.email("aaa@aaa.com")
+				.memo("ì•„ë¬´ ë‚´ìš©")
 				.build();
 		
 		controller.postContact(expected, new MockHttpServletResponse());
@@ -42,10 +41,10 @@ public class TestContactController {
 	void removeContact() {
 		ContactController controller = new ContactController();
 		
-		Contact testItem = Contact.builder().name("È«±æµ¿")
+		Contact testItem = Contact.builder().name("í™ê¸¸ë™")
 				.phoneNumber("1111-1111")
-				.eMail("aaa@aaa.com")
-				.memo("¾Æ¹« ³»¿ë")
+				.email("aaa@aaa.com")
+				.memo("ì•„ë¬´ ë‚´ìš©")
 				.build();
 		
 		controller.postContact(testItem, new MockHttpServletResponse());
@@ -63,10 +62,10 @@ public class TestContactController {
 	void modifyContact() {
 		ContactController controller = new ContactController();
 		
-		Contact testItem = Contact.builder().name("È«±æµ¿")
+		Contact testItem = Contact.builder().name("í™ê¸¸ë™")
 				.phoneNumber("1111-1111")
-				.eMail("aaa@aaa.com")
-				.memo("¾Æ¹« ³»¿ë")
+				.email("aaa@aaa.com")
+				.memo("ì•„ë¬´ ë‚´ìš©")
 				.build();
 		
 		controller.postContact(testItem, new MockHttpServletResponse());
