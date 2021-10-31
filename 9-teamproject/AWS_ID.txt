@@ -1,0 +1,15 @@
+
+git2021seojihwan@gmail.com
+
+a1234567890!
+
+AWS Gateway
+ID
+git2021server3@gmail.com
+PW
+a1234567890!
+
+AWS message queue
+ID peoplestone2022@gmail.com
+Pw
+a1234567890!
