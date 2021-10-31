@@ -1,0 +1,7 @@
+server:
+  port: 5050
+spring:
+  rabbitmq:     addresses: amqps://b-9b495715-2765-4d51-b6c3-ab064d23337a.mq.ap-northeast-2.amazonaws.com:5671
+#    host: ec2-13-125-158-16.ap-northeast-2.compute.amazonaws.com
+    username: rabbitmq
+    password: password123

@@ -1,0 +1,35 @@
+server:
+  port: 8000
+spring:   profiles:    active: default
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      # service registry에 있는 서비스명으로 라우팅처리
+      # /service-1/** -> service-1물리주소/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+        
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ec2-13-209-214-32.ap-northeast-2.compute.amazonaws.com:8761/eureka/
+  instance:
+    hostname: ec2-13-209-214-32.ap-northeast-2.compute.amazonaws.com
