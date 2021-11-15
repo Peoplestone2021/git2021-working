@@ -1,0 +1,1 @@
+ssh -i "c:\keyfile\gw.pem" ubuntu@ec2-13-209-214-32.ap-northeast-2.compute.amazonaws.com

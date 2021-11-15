@@ -27,7 +27,7 @@ public class CovidController {
 		this.repo = repo;
 	}
 
-	@Cacheable(value = cachName, key = "'all'")
+//	@Cacheable(value = cachName, key="'all'")
 	@GetMapping(value = "/sido/current")
 	public List<CovidSidoDay> getCovidSidoCurrent() {
 		List<Order> orders = new ArrayList<Order>();
@@ -37,8 +37,14 @@ public class CovidController {
 	return repo.findAll(PageRequest.of(0, 25, Sort.by(orders))).toList();
 	}
 	
+//	select * from covid_sido_day csd 
+//	order by std_day desc, gubun asc
+//	limit 25;	
+	
+//	@Cacheable(value = cachName, key="#gubun")
+	@GetMapping(value="/sido/current/{gubun}")
 	public List<CovidSidoDay> getCovidSidoCurrent(@PathVariable String gubun) {
-		Pageable page = PageRequest.of(0, 6, Sort.by("stdDay").descending());
+		Pageable page = PageRequest.of(0, 14, Sort.by("stdDay").descending());
 		return repo.findByGubun(page, gubun);
 	}
 

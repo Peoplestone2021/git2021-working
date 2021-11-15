@@ -1,0 +1,1 @@
+ssh -i "c:\keyfile\mq.pem" ubuntu@ec2-13-125-158-16.ap-northeast-2.compute.amazonaws.com

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import profileReducer from "../features/profile/profileSlice";
-import photoReduer from "./modules/photo";
+import photoReducer from "./modules/photo";
 // import contactReducer from "../features/contact/contactSlice";
 import progressReducer from "./modules/progress";
 import alertReducer from "./modules/alert";
@@ -24,7 +24,7 @@ export const store = configureStore({
     // profile state 처리하는 reducer를 등록
     // profile: profileReducer,
     // photo state를 처리하는 reducer를 등록
-    photo: photoReduer,
+    photo: photoReducer,
     // contact: contactReducer,
     progress: progressReducer,
     alert: alertReducer,

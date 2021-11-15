@@ -1,5 +1,6 @@
 package com.git.myworkspace.opendata.covid;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -22,10 +23,11 @@ public class CovidSidoDay {
 	@Id
 	private String stdDay;
 	@Id
+	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
 	private String gubun;
 	
 	// 확진자 수
-	private String defCnt;
+	private Integer defCnt;
 	// 해외 유입 확진자 
 	private Integer overFlowCnt;
 	// 국내 발생 확진자

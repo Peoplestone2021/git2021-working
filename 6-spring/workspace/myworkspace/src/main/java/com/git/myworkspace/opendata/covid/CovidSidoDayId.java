@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CovidSidoDayId implements Serializable {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 	
 	private String stdDay;
 	private String gubun;

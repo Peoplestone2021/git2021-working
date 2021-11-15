@@ -3,6 +3,7 @@ package com.git.myworkspace.opendata.covid;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+//import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,14 +28,15 @@ public class CovidService {
 		this.repo = repo;
 	}
 	
-//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
-	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+//	@Scheduled(cron = "0 0 12 * * *")
 //	@Scheduled(cron = "0 * * * * *")
 	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovid() throws IOException {
 		String[] gubuns = { "서울" };
 		for (String gubun : gubuns) {
 			requestCovidSidoDay(gubun);
+//			System.out.println(gubuns);
 		}
 	}
 
@@ -48,13 +50,20 @@ public class CovidService {
 		builder.append("/rest");
 		builder.append("/Covid19");
 		builder.append("/getCovid19SidoInfStateJson");
-		builder.append("?pageNo=1&numOfRows=100");
+		builder.append("?pageNo=1&numOfRows=10");
 //		builder.append("?pageNo=1&numOfRows=100");
-//		builder.append("&startCreateDt=20210101");
+		builder.append("&startCreateDt=20211111");
 //		builder.append("&endCreateDt="+ gubun);
-//		builder.append("&endCreateDt=20211006");
+		builder.append("&endCreateDt=20211114");
 		builder.append("&serviceKey=" + SERVICE_KEY);
-
+//		http://openapi.data.go.kr/openapi
+//			/service
+//			/rest
+//			/Covid19
+//			/getCovid19SidoInfStateJson
+//			?pageNo=1
+//			&numOfRows=10
+//			&serviceKey=
 		
 //		http://openapi.data.go.kr/openapi
 //		/service
@@ -70,17 +79,19 @@ public class CovidService {
 //		&startCreateDt=20200410
 //		&endCreateDt=20200410
 
-		System.out.println(builder.toString());
+//		System.out.println(builder.toString());
 
 		URL url = new URL(builder.toString());
 		
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 		byte[] result = con.getInputStream().readAllBytes();
+		
+//		System.out.println("result: "+ result);
 
 		String data = new String(result, "UTF-8");
 
-		System.out.println(data);
+//		System.out.println(data);
 
 		String json = XML.toJSONObject(data).toString(2);
 
@@ -88,7 +99,7 @@ public class CovidService {
 
 		CovidSidoDayResponse response = new Gson().fromJson(json, CovidSidoDayResponse.class);
 		
-		System.out.println(response);
+//		System.out.println(response);
 
 		List<CovidSidoDay> list = new ArrayList<CovidSidoDay>();
 		for(CovidSidoDayResponse.Item item:response
@@ -98,7 +109,9 @@ public class CovidService {
 					.builder()
 					.stdDay(item.getStdDay())
 					.gubun(item.getGubun())
-					.defCnt(item.getDefCnt())
+					.defCnt(item.getDefCnt()
+							.isEmpty() ? null : Integer
+							.valueOf(item.getDefCnt()))
 					.overFlowCnt(item.getOverFlowCnt()
 							.isEmpty() ? null : Integer
 							.valueOf(item.getOverFlowCnt()))
