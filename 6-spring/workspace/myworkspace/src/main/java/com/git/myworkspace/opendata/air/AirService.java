@@ -75,6 +75,7 @@ public class AirService {
 
 		// 2. URL 객체 생성
 		URL url = new URL(builder.toString());
+		
 
 		// 3. Http 접속 생성
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();

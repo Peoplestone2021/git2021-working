@@ -8,7 +8,7 @@ public class TestController {
 
 	@GetMapping(value = "/test")
 	public String test() {
-		System.out.println("--service1--");
-		return "1";
+		System.out.println("--service11--");
+		return "5050: 1111";
 	}
 }

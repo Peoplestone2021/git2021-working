@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class SalesProduct {
 
 	private int id;
+	private String category;
 	private String code;
 	private String name;
-	private int unitPrice;
+	private int price;
 }

@@ -1,5 +1,8 @@
 package com.example.commerce.order;
 
-public class CommerceOrderDetailRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface CommerceOrderDetailRepository extends JpaRepository<CommerceOrderDetail, CommerceOrderDetailId> {
 }

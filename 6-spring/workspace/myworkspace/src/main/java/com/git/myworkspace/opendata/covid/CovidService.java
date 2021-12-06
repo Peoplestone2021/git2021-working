@@ -95,7 +95,7 @@ public class CovidService {
 
 		String json = XML.toJSONObject(data).toString(2);
 
-		System.out.println(json);
+		System.out.println("json: "+json +"==== json end");
 
 		CovidSidoDayResponse response = new Gson().fromJson(json, CovidSidoDayResponse.class);
 		
@@ -117,15 +117,15 @@ public class CovidService {
 							.valueOf(item.getOverFlowCnt()))
 					.localOccCnt(item.getLocalOccCnt()
 							.isEmpty() ? null : Integer
-									.valueOf(item.getOverFlowCnt()))
-					.isolIngCnt(item.getIsolIngCnt()
-							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+									.valueOf(item.getLocalOccCnt()))
+//					.isolIngCnt(item.getIsolIngCnt()
+//							.isEmpty() ? null : Integer.valueOf(item.getIsolIngCnt()))
 					.isolClearCnt(item.getIsolClearCnt()
-							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+							.isEmpty() ? null : Integer.valueOf(item.getIsolClearCnt()))
 					.deathCnt(item.getDeathCnt()
-							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+							.isEmpty() ? null : Integer.valueOf(item.getDeathCnt()))
 					.incDec(item.getIncDec()
-							.isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+							.isEmpty() ? null : Integer.valueOf(item.getIncDec()))
 					.build();
 			
 			list.add(record);

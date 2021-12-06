@@ -1,0 +1,7 @@
+connect2 - 수업 개인 프론트엔드/postgreDB
+	ec2-52-78-190-195.ap-northeast-2.compute.amazonaws.com
+	ip-172-31-0-111.ap-northeast-2.compute.internal
+
+mq-개인mq
+	ec2-13-125-158-16.ap-northeast-2.compute.amazonaws.com
+	ip-172-31-13-215.ap-northeast-2.compute.internal
