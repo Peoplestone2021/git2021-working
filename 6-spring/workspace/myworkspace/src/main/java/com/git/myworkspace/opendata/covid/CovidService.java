@@ -28,8 +28,8 @@ public class CovidService {
 		this.repo = repo;
 	}
 	
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
-//	@Scheduled(cron = "0 0 12 * * *")
+//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+	@Scheduled(cron = "0 0 12 * * *")
 //	@Scheduled(cron = "0 * * * * *")
 	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovid() throws IOException {
@@ -118,6 +118,7 @@ public class CovidService {
 					.localOccCnt(item.getLocalOccCnt()
 							.isEmpty() ? null : Integer
 									.valueOf(item.getLocalOccCnt()))
+//					21-12-06	json 데이터 형식 변경으로 추정 
 //					.isolIngCnt(item.getIsolIngCnt()
 //							.isEmpty() ? null : Integer.valueOf(item.getIsolIngCnt()))
 					.isolClearCnt(item.getIsolClearCnt()
